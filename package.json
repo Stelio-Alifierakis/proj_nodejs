@@ -13,5 +13,10 @@
     "jade": "~1.11.0",
     "morgan": "~1.7.0",
     "serve-favicon": "~2.3.0"
-  }
+  },
+  "description": "e-marketing",
+  "main": "app.js",
+  "devDependencies": {},
+  "author": "Stelio et Samuel",
+  "license": "ISC"
 }
