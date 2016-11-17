@@ -1,7 +1,39 @@
 doctype html
-html
+html(lang='fr')
   head
-    title= title
+    title Arnaque.com
+    meta(charset='utf-8')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block content
+
+    #corps
+      header
+        img(src='', alt='non disponible', height='75', width='75')
+
+        h1 Arnaque.com
+
+        nav
+          ul
+            li
+              a(href="/") Accueil
+            li
+              a(href="/produits") Produit
+            li
+              a Catégorie
+            li
+              a Recherche
+            li
+              a Mon panier
+            li
+              a Mon profil
+            li
+              a Identification
+      #gauche
+        p  Bonjour gauche
+      #main
+        block titre
+        p  Bonjour main
+        block content
+      #droite
+        p  Bonjour droite
+      footer
