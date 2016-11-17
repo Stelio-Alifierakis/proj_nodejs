@@ -7,19 +7,46 @@ body,html {
   font-family: Arial;
 }
 
+html {
+  height: 100%;
+}
+
+body {
+  position : relative;
+  min-height: 100%;
+}
+
 #corps {
   background-color: cornflowerblue;
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
 
 }
 
 header {
   background-color: #EE0;
-
+  position: relative;
+  overflow: auto;
+  height: auto;
+  clear: both;
 }
 
-nav {position : static;background-color : #DDD ; width : 1000px ;
+header img {
+  position: absolute;
+  top:3px;
+}
+
+header h1 {
+  text-align : center;
+  margin : 0
+  clear:both;
+}
+
+nav {
+  position: static;
+  background-color : #DDD ;
+  width : auto; ;
+  clear : both;
 }
 
 nav li {
@@ -32,15 +59,42 @@ nav a:hover{
   background-color:#FFF;color : #050;}
 
 #gauche {
-   background-color: #0EE;
+  background-color: #0EE;
+  float: left;
+  width : 20%;
+
+}
+
+#gauche:after {
+  content: ""; /* Important, sinon l'élément n'est pas généré. */
+  display: table;
+  clear: both;
 }
 
 #main {
   background-color: #0E0;
+  float: left;
+  width: 60%;
 }
 
 #droite {
   background-color: #FF8800;
+  float: right;
+  width : 20%;
+  overflow: auto;
+}
+
+#droite:after {
+  content: ""; /* Important, sinon l'élément n'est pas généré. */
+  display: table;
+  clear: both;
+}
+
+footer {
+  background-color: #777777;
+  width: auto;
+  overflow: auto;
+  clear : both;
 }
 
 h1 {
