@@ -18,17 +18,35 @@ body {
 
 #corps {
   background-color: cornflowerblue;
-  width: 85%;
+  width: 100%;
   margin: 0 auto;
 
 }
 
 header {
   background-color: #EE0;
-
+  position: relative;
+  overflow: auto;
+  height: auto;
+  clear: both;
 }
 
-nav {position : static;background-color : #DDD ; width : 1000px ;
+header img {
+  position: absolute;
+  top:3px;
+}
+
+header h1 {
+  text-align : center;
+  margin : 0
+  clear:both;
+}
+
+nav {
+  position: static;
+  background-color : #DDD ;
+  width : auto; ;
+  clear : both;
 }
 
 nav li {
@@ -47,18 +65,16 @@ nav a:hover{
 
 }
 
-#gauche > * {
-  clear : both;
-  height: 0;
-  /*overflow: hidden; */
-
-
-
+#gauche:after {
+  content: ""; /* Important, sinon l'élément n'est pas généré. */
+  display: table;
+  clear: both;
 }
 
 #main {
   background-color: #0E0;
   float: left;
+  width: 60%;
 }
 
 #droite {
@@ -68,10 +84,15 @@ nav a:hover{
   overflow: auto;
 }
 
+#droite:after {
+  content: ""; /* Important, sinon l'élément n'est pas généré. */
+  display: table;
+  clear: both;
+}
+
 footer {
-  position: absolute; bottom: 0;
   background-color: #777777;
-  width: 85%;
+  width: auto;
   overflow: auto;
   clear : both;
 }
