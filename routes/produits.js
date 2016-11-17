@@ -8,4 +8,12 @@ router.get('/', function(req, res, next) {
  res.render('produits');
  });
 
+router.get('/categories', function(req, res, next) {
+ res.render('categories');
+});
+
+router.get('/recherche', function(req, res, next) {
+ res.render('recherche');
+});
+
 module.exports = router;
