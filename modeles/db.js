@@ -53,3 +53,6 @@ process.on('SIGTERM', function() {
 
 // BRING IN YOUR SCHEMAS & MODELS
 Produit = require('./produit');
+Categorie = require('./categories');
+Utilisateur = require('./utilisateurs');
+Panier = require('./panier');
