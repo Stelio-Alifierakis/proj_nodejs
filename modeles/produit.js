@@ -4,9 +4,11 @@
 var mongoose = require('mongoose');
 
 var ProduitSchema = new mongoose.Schema({
-    nom : String,
-    lien : { type : String, required: true, unique: true, lowercase: true },
-    description : { type : String, required: true }
+    nom : { type : String, required: true, unique: true },
+    prix : { type : Double, required: true },
+    description : { type : String },
+    categorie : { type : String, required: true },
+    image : { type : String }
 });
 
 module.exports = mongoose.model('Produit',ProduitSchema);
