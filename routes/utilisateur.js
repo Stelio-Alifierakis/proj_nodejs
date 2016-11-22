@@ -27,4 +27,6 @@ router.get('/panier',utilisateurController.panierControleur);
 
 router.get('/profil',utilisateurController.profilControleur);
 
+router.get('/creerProduit',utilisateurController.addProduitControleur);
+
 module.exports = router;

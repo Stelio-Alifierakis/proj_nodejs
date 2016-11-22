@@ -16,3 +16,8 @@ module.exports.panierControleur =function (req, res, next) {
     res.render('panier');
 
 }
+
+module.exports.addProduitControleur =function (req, res, next) {
+    res.render('addProduit');
+
+}
