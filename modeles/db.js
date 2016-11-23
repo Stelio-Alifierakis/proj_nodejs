@@ -52,7 +52,8 @@ process.on('SIGTERM', function() {
 });
 
 // BRING IN YOUR SCHEMAS & MODELS
-Produit = require('./produit');
+
 Categorie = require('./categories');
-Utilisateur = require('./utilisateurs');
+Utilisateur = require('./utilisateur');
 Panier = require('./panier');
+Produit = require('./produit');

@@ -3,6 +3,8 @@
  * Modified by samou on 22-11-16.
  */
 
+require('../modeles/db');
+
 module.exports.produitControleur =function (req, res, next) {
     res.render('produits');
 

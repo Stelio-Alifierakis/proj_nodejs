@@ -4,9 +4,8 @@
 var mongoose = require('mongoose');
 
 var PanierSchema = new mongoose.Schema({
-    nom : String,
-    lien : { type : String, required: true, unique: true, lowercase: true },
-    description : { type : String, required: true }
+    utilisateur : { type : String },
+    produit : { type : String }
 });
 
 module.exports = mongoose.model('Panier',PanierSchema);
