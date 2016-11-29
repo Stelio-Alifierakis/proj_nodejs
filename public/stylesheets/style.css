@@ -77,6 +77,12 @@ nav a:hover{
   width: 60%;
 }
 
+#main:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 #droite {
   background-color: #FF8800;
   float: right;
@@ -88,6 +94,12 @@ nav a:hover{
   content: ""; /* Important, sinon l'élément n'est pas généré. */
   display: table;
   clear: both;
+}
+
+.Produit {
+  
+
+
 }
 
 footer {

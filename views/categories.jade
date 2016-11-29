@@ -3,9 +3,11 @@ block titre
   h2 Catégories
 block content
   ul
-    for cat,i in Categorie
+    for categorie,i in tab_categories
       li
-        a cat.nom
+        a #{categorie.nom}
 
-   p
-     a(href="/utilisateur/creerCategorie") Ajouter une catégorie
+  p
+    a(href="/utilisateur/creerCategorie") Ajouter une catégorie
+
+

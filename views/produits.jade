@@ -7,3 +7,14 @@ block content
 
   p
     a(href="/utilisateur/creerProduit") Ajouter un produit
+
+  for produit,i in tab_produits
+    .produit
+      .headerProduit
+        h3 #{produit.nom}
+      p
+        img(src='', alt='non disponible', height='75', width='75')
+        ul
+          li Prix : #{produit.prix}
+          li Catégorie : #{produit.categorie}
+      p Description : #{produit.description}
