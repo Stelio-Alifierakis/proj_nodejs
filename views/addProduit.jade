@@ -21,7 +21,12 @@ block content
             //
                 input#categorie(type='text', name='Categorie', placeholder='Categorie du Produit', maxlength='20')
             select#categorie(name='Categorie')
-                option(value='bijoux') Bijoux
+
+                for categorie,i in tab_categories
+                    option #{categorie.nom}
+                //option #{categorie.nom}
+
+                //option(value='bijoux') Bijoux
 
                 //
                     option(value='informatique') Informatique
