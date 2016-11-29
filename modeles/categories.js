@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
     Schema=mongoose.Schema;
 
 var CategorieSchema = new mongoose.Schema({
-    nom : { type : String, required: true, unique: true, ref : 'Produit' },
+    nom : { type : String, required: true, unique: true },
     description : { type : String }
 });
 

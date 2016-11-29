@@ -30,6 +30,16 @@ module.exports.addProduitControleur =function (req, res, next) {
 }
 
 module.exports.addCategorieControleur =function (req, res, next) {
-    res.render('addCategorie');
+    Categorie.find(function (err,cat){
+        res.render('addCategorie',{'cat1' : cat});
+    })
+}
+
+module.exports.creerLienControleur =function (req, res, next) {
+    var cat = new Categorie ();
+    cat.nom = req.body.Nom;
+    cat.description = req.body.Description;
+    cat.save();
+    res.redirect('/produits/categories');
 
 }

@@ -31,6 +31,8 @@ router.get('/profil',utilisateurController.profilControleur);
 
 router.get('/creerProduit',utilisateurController.addProduitControleur);
 
-router.get('/creerCategorie',utilisateurController.addCategorieControleur)
+router.get('/creerCategorie',utilisateurController.addCategorieControleur);
+
+router.post('/creerCategorie',utilisateurController.creerLienControleur);
 
 module.exports = router;
