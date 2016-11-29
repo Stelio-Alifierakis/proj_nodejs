@@ -25,8 +25,9 @@ module.exports.panierControleur =function (req, res, next) {
 }
 
 module.exports.addProduitControleur =function (req, res, next) {
-    res.render('addProduit');
-
+    Categorie.find(function (err,categories) {
+        res.render('addProduit', {tab_categories: categories});
+    });
 }
 
 module.exports.addCategorieControleur =function (req, res, next) {
