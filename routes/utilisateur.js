@@ -23,10 +23,14 @@ router.get('/profil', function(req, res, next) {
 
 router.get('/inscription',utilisateurController.inscriptionControleur);
 
+router.get('/connexion',utilisateurController.connexionControleur) ;
+
 router.get('/panier',utilisateurController.panierControleur);
 
 router.get('/profil',utilisateurController.profilControleur);
 
 router.get('/creerProduit',utilisateurController.addProduitControleur);
+
+router.get('/creerCategorie',utilisateurController.addCategorieControleur)
 
 module.exports = router;
