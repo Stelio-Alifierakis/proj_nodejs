@@ -18,13 +18,17 @@ block content
             textarea#description(type='text', name='Description', placeholder='Description du Produit', size='40')
         p
             label(for='categorie') Categorie :
-            //input#categorie(type='text', name='Categorie', placeholder='Categorie du Produit', maxlength='20')
+            //
+                input#categorie(type='text', name='Categorie', placeholder='Categorie du Produit', maxlength='20')
             select#categorie(name='Categorie')
-                option(value='alimentaires') Alimentaires
                 option(value='bijoux') Bijoux
-                option(value='informatique') Informatique
-                option(value='jeux') Jeux
-                option(value='musique') Musique
+
+                //
+                    option(value='informatique') Informatique
+                //
+                    option(value='jeux') Jeux
+                //
+                    option(value='musique') Musique
         p
             label(for='image') Image (lien) :
             input#image(type='url', name='Image', placeholder='Lien de l image', size='30', maxlength='20')

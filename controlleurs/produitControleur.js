@@ -5,13 +5,21 @@
 
 require('../modeles/db');
 
+
+
 module.exports.produitControleur =function (req, res, next) {
-    res.render('produits');
+    Produit.find(function (err,produit) {
+        res.render('produits',{'tab_produits' : produit});
+    })
+
 
 }
 
 module.exports.categoriesControleur =function (req, res, next) {
-    res.render('categories');
+    Categorie.find(function (err,categories) {
+        res.render('categories',{'tab_categories' : categories});
+    })
+
 
 }
 
