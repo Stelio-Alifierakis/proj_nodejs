@@ -25,14 +25,14 @@ module.exports.panierControleur =function (req, res, next) {
 }
 
 module.exports.addProduitControleur =function (req, res, next) {
+
+
     res.render('addProduit');
 
 }
 
 module.exports.addCategorieControleur =function (req, res, next) {
-    Categorie.find(function (err,cat){
-        res.render('addCategorie',{'cat1' : cat});
-    })
+        res.render('addCategorie');
 }
 
 module.exports.creerLienControleur =function (req, res, next) {

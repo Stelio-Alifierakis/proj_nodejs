@@ -3,8 +3,9 @@ block titre
   h2 Catégories
 block content
   ul
-    li
-      a Categorie1
+    for cat,i in Categorie
+      li
+        a cat.nom
 
    p
      a(href="/utilisateur/creerCategorie") Ajouter une catégorie

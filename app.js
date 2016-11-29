@@ -10,6 +10,8 @@ var users = require('./routes/users');
 var produit = require('./routes/produits');
 var utilisateur = require('./routes/utilisateur');
 
+require('./modeles/db');
+
 var app = express();
 
 // view engine setup
@@ -28,6 +30,14 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/produits',produit);
 app.use('/utilisateur', utilisateur);
+
+app.use(function(req,res,next){
+  Categorie.find(function (err,cat){
+
+    res.locals.Categorie = cat.nom;
+    console.log(Categorie);
+  })
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
