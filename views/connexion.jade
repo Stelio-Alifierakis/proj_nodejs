@@ -1,0 +1,16 @@
+extends layout
+block titre
+    h2 Connexion
+block content
+    form
+        p
+            label(for='nomUtilisateur') Nom d'utilisateur :
+            input#nomUtilisateur(type='text', name='nomUtilisateur', placeholder="Nom d'utilisateur")
+        p
+            label(for='mdpUtilisateur') Mot de passe :
+            input#mdpUtilisateur(type='password', name='mdpUtilisateur', placeholder="Nom d'utilisateur")
+        p
+            input(type="submit" value="Connexion")
+
+        p
+            a(href="/utilisateur/inscription") Par encore inscrit ? Créer un compte.

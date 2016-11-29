@@ -1,0 +1,32 @@
+extends layout
+
+block titre
+    h2 Ajouter un produit
+
+block content
+    //form(method='post',action='/liens/creerLien')
+
+    form(method='post',action='/utilisateur/creerProduit')
+        p
+            label(for='Nom') Nom :
+            input#Nom(type='text', name='Nom', placeholder='Nom du Produit', size='30', maxlength='20')
+        p
+            label(for='Prix') Prix :
+            input#Prix(type='number', name='Prix', placeholder='Prix du Produit',min='0')
+        p
+            label(for='description') Description :
+            textarea#description(type='text', name='Description', placeholder='Description du Produit', size='40')
+        p
+            label(for='categorie') Categorie :
+            //input#categorie(type='text', name='Categorie', placeholder='Categorie du Produit', maxlength='20')
+            select#categorie(name='Categorie')
+                option(value='alimentaires') Alimentaires
+                option(value='bijoux') Bijoux
+                option(value='informatique') Informatique
+                option(value='jeux') Jeux
+                option(value='musique') Musique
+        p
+            label(for='image') Image (lien) :
+            input#image(type='url', name='Image', placeholder='Lien de l image', size='30', maxlength='20')
+        p
+            input(type="submit",value="Valider")
