@@ -53,15 +53,15 @@ module.exports.creerProduitLienControleur =function (req, res, next) {
     prod.prix = req.body.Prix;
     prod.categorie=req.body.Categoriess;
     prod.description = req.body.Description;
-    //if(req.body.Image == ""){
+    if(req.body.Image == ""){
     prod.image = '/images/box.png';
-    /*}
+    }
     else{
         prod.image = req.body.Image;
-    }*/
-
+    }
 
     prod.save();
     res.redirect('/');
 
 }
+

@@ -26,4 +26,8 @@ router.get('/categories',produitController.categoriesControleur);
 
 router.get('/recherche',produitController.rechercheControleur);
 
+router.get('/supprimerProduit/:id',produitController.getSupprimerProduitControleur);
+
+router.post('/modifProduit/:id',produitController.postModifProduit);
+
 module.exports = router;

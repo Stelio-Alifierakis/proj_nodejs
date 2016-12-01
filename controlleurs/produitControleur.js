@@ -27,3 +27,22 @@ module.exports.rechercheControleur =function (req, res, next) {
     res.render('recherche');
 
 }
+
+module.exports.getSupprimerProduitControleur=function(req,res){
+    /*tab_liens.splice(req.params.id);
+     res.redirect('/Liens');*/
+    Produit.findOneAndRemove({_id : req.params.id},function (err) {
+            if(err) console.error(err);
+            res.redirect('/produits');
+        }
+    );
+}
+
+module.exports.postModifProduit = function(req,res){
+    var prod = {nom: req.body.Nom, prix: req.body.Prix, description: req.body.Description, image: req.body.Description, categorie: req.body.Categoriess};
+    Produit.findByIdAndUpdate(req.params.id,lien,function (err,obj){
+        if(err) console.error(err);
+        console.log(obj);
+    });
+    res.redirect('/produits');
+}
