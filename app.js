@@ -31,13 +31,14 @@ app.use('/users', users);
 app.use('/produits',produit);
 app.use('/utilisateur', utilisateur);
 
-/*app.use(function(req,res,next){
+app.use(function(req,res,next){
   Categorie.find(function (err,cat){
 
     res.locals.Categories = cat;
     next();
   })
-});*/
+});
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
