@@ -27,3 +27,10 @@ module.exports.rechercheControleur =function (req, res, next) {
     res.render('recherche');
 
 }
+
+module.exports.getModifProduitControleur = function (req,res) {
+    Produit.findById(req.params.id,function (err,produit) {
+        res.render('addProduit',{'tab_produits' : produit}) ;
+    })
+
+}

@@ -15,6 +15,10 @@ block content
       p
         img(src='#{produit.image}', alt='non disponible', height='75', width='75')
         ul
-          li Prix : #{produit.prix}
+          li Prix : #{produit.prix} €
           li Catégorie : #{produit.categorie}
-      p Description : #{produit.description}
+      p.p_desc Description : #{produit.description}
+
+      a(href="/produit/editerProduit/" + produit.id) Editer le produit
+      br
+      a(href="/produit/supprimerProduit/" + produit.id) Supprimer le produit

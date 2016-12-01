@@ -26,4 +26,6 @@ router.get('/categories',produitController.categoriesControleur);
 
 router.get('/recherche',produitController.rechercheControleur);
 
+router.get('/modifProduit/:id',produitController.getModifProduitControleur) ;
+
 module.exports = router;
