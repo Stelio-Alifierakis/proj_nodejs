@@ -40,9 +40,20 @@ module.exports.getSupprimerProduitControleur=function(req,res){
 
 module.exports.postModifProduit = function(req,res){
     var prod = {nom: req.body.Nom, prix: req.body.Prix, description: req.body.Description, image: req.body.Description, categorie: req.body.Categoriess};
-    Produit.findByIdAndUpdate(req.params.id,lien,function (err,obj){
+    Produit.findByIdAndUpdate(req.params.id,prod,function (err,obj){
         if(err) console.error(err);
         console.log(obj);
     });
     res.redirect('/produits');
+}
+
+module.exports.getModifProduitControleur = function (req,res) {
+    Produit.findById(req.params.id,function (err,produit) {
+        Categorie.find(function (err,cat){
+            if(err) console.error(err);
+            res.render('addProduit',{'tab_produits' : produit, 'tab_categories' : cat}) ;
+        })
+
+    })
+
 }

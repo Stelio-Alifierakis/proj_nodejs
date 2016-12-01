@@ -30,4 +30,6 @@ router.get('/supprimerProduit/:id',produitController.getSupprimerProduitControle
 
 router.post('/modifProduit/:id',produitController.postModifProduit);
 
+router.get('/editerProduit/:id',produitController.getModifProduitControleur) ;
+
 module.exports = router;

@@ -34,7 +34,7 @@ app.use('/utilisateur', utilisateur);
 app.use(function(req,res,next){
   Categorie.find(function (err,cat){
 
-    res.locals.Categories = cat;
+    res.locals.Categoriesss = cat;
     next();
   })
 });
