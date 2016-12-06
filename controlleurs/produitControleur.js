@@ -38,7 +38,7 @@ module.exports.getSupprimerProduitControleur=function(req,res){
 }
 
 module.exports.postModifProduit = function(req,res){
-    var prod = {nom: req.body.Nom, prix: req.body.Prix, description: req.body.Description, image: req.body.Description, categorie: req.body.Categoriess};
+    var prod = {nom: req.body.Nom, prix: req.body.Prix, description: req.body.Description, image: req.body.Image, categorie: req.body.Categoriess};
     Produit.findByIdAndUpdate(req.params.id,prod,function (err,obj){
         if(err) console.error(err);
         console.log(obj);
@@ -52,7 +52,6 @@ module.exports.getModifProduitControleur = function (req,res) {
             if(err) console.error(err);
             res.render('addProduit',{'tab_produits' : produit, 'tab_categories' : cat}) ;
         })
-
     })
 
 }

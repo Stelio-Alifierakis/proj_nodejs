@@ -2,7 +2,7 @@ extends layout
 block titre
     h2 Connexion
 block content
-    form
+    form(method='post',action="#/utilisateur/connexion")
         p
             label(for='nomUtilisateur') Nom d'utilisateur :
             input#nomUtilisateur(type='text', name='nomUtilisateur', placeholder="Nom d'utilisateur")

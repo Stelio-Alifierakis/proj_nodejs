@@ -7,8 +7,9 @@ var mongoose = require('mongoose')
 var Utilisateur = require('./utilisateur');
 
 var PanierSchema = new mongoose.Schema({
-    utilisateur : [{ type : Schema.Types.ObjectId, ref: 'Utilisateur' }],
-    produit : { type : String }
+    utilisateur : { type : String, required: true, unique: true },
+    produit : { type : String },
+    statut : { type : String, required: true, unique: true }
 });
 
 module.exports = mongoose.model('Panier',PanierSchema);

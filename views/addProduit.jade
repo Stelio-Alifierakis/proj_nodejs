@@ -25,6 +25,6 @@ block content
 
         p
             label(for='image') Image (lien) :
-            input#image(type='url', name='Image', placeholder='Lien de l image', size='30', maxlength='255')
+            input#image(type='url', name='Image', placeholder='Lien de l image', size='30', maxlength='255', value="#{tab_produits!=undefined?tab_produits.image: ' '}")
         p
             input(type="submit",value="Valider")

@@ -37,4 +37,8 @@ router.post('/creerCategorie',utilisateurController.creerLienControleur);
 
 router.post('/creerProduit',utilisateurController.creerProduitLienControleur);
 
+router.post('/inscription',utilisateurController.postinscriptionControleur);
+
+router.post('/connexion',utilisateurController.postConnexionControleur);
+
 module.exports = router;

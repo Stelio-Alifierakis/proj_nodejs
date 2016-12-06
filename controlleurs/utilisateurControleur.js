@@ -3,6 +3,7 @@
  */
 
 require('../modeles/db');
+var bcrypt = require('bcryptjs');
 
 module.exports.inscriptionControleur =function (req, res, next) {
     res.render('inscription');
@@ -62,6 +63,36 @@ module.exports.creerProduitLienControleur =function (req, res, next) {
 
     prod.save();
     res.redirect('/');
+
+}
+
+module.exports.postinscriptionControleur =function (req, res, next) {
+    var user = new Utilisateur ();
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync(req.body.mdpUtilisateur,salt);
+
+    user.pseudo = req.body.nomUtilisateur;
+    user.mdp = hash;
+    user.role='user';
+    user.avatar = '/images/anonyme.jpg';
+
+    user.save();
+    res.redirect('/');
+
+}
+
+module.exports.postConnexionControleur =function (req, res, next) {
+
+    Utilisateur.findOne({ pseudo : req.body.nomUtilisateur }, function(err,user){
+        if(err) console.error(err);
+        if(bcrypt.compareSync(req.body.mdpUtilisateur,user.mdp)){
+            res.redirect('/');
+        }
+        else{
+            res.redirect('/produits');
+        }
+
+    })
 
 }
 
