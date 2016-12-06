@@ -61,3 +61,4 @@ module.exports.categoriesProd = function (req,res) {
         res.render('produits',{'tab_produits' : produit});
     })
 }
+

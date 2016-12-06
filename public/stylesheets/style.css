@@ -3,7 +3,7 @@ body,html {
   margin: 0;
   padding: 0;
   background-color: #DDD;
-  color: #444;
+  color: #FBF2B7;
   font-family: Arial;
 }
 
@@ -17,51 +17,55 @@ body {
 }
 
 #corps {
-  background-color: cornflowerblue;
+  /*background-color: cornflowerblue;*/
+  background-image: url("http://images.frandroid.com/wp-content/uploads/2016/02/galaxy-s7-edge-2-knox.jpg");
   width: 100%;
   margin: 0 auto;
 
 }
 
 header {
-  background-color: #EE0;
-  position: relative;
+  background-color: #FBF2B7;
   overflow: auto;
-  height: auto;
-  clear: both;
 }
 
 header img {
-  position: absolute;
+  float : left;
   top:3px;
   clear:both;
-}
 
-header h1 {
-  text-align : center;
-  clear:both;
 }
 
 nav {
   position: static;
-  background-color : #DDD ;
+  background-color : #111111;
   width : auto; ;
   clear : both;
 }
 
 nav li {
-  display : inline-block ; list-style : none;padding:0;margin:0;}
+  display: inline-block;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 nav ul {
   padding:0;margin:0;}
 nav a {
-  text-decoration : none;display : block;padding:20px;}
+  text-decoration : none;display : block;padding:20px;
+  color : #FBF2B7
+}
 nav a:hover{
   background-color:#FFF;color : #050;}
 
 #gauche {
-  background-color: #0EE;
+  /*background-color: #0EE;*/
+  background-image:
+          url("http://www.psycheduweb.fr/wp-content/uploads/2011/06/fond-gris-degrade.jpg");
   float: left;
   width : 20%;
+  height: 700px;
 
 }
 
@@ -72,9 +76,17 @@ nav a:hover{
 }
 
 #main {
-  background-color: #0E0;
+  /*background-color: #0E0; */
+  /*background-image: url("http://images.frandroid.com/wp-content/uploads/2016/02/galaxy-s7-edge-2-knox.jpg");*/
   float: left;
   width: 60%;
+}
+
+#main h2 {
+  text-align: center;
+  padding : 20px;
+  border-bottom: 4px groove #FBF2B7;
+  margin : 0 auto;;
 }
 
 #main:after {
@@ -84,7 +96,9 @@ nav a:hover{
 }
 
 #droite {
-  background-color: #FF8800;
+  /*background-color: #FF8800;*/
+  background-image:
+  url("http://www.psycheduweb.fr/wp-content/uploads/2011/06/fond-gris-degrade.jpg");
   float: right;
   width : 20%;
   overflow: auto;
@@ -97,7 +111,7 @@ nav a:hover{
 }
 
 .produit {
-  border : 1px solid #000;
+  border : 1px groove #FBF2B7;
   width: 30%;
   float : left;
   margin : 10px;
@@ -126,19 +140,19 @@ nav a:hover{
 
 .headerProduit {
 
-  border-bottom : 1px dotted #000;
+  border-bottom : 1px groove #FBF2B7;
   padding: 5px;
 }
 
 footer {
-  background-color: #777777;
+  background-color: #444444;
   width: auto;
   overflow: auto;
   clear : both;
 }
 
 h1 {
-  color: #AA0000;
+  color: #EE0000;
 
 }
 
@@ -154,11 +168,29 @@ h3:first-letter{
 }
 
 a {
-  color: #0066FF;
+  color: #EE0000;
 }
 
 p.p_desc {
   clear : both ;
-
-
 }
+
+footer {
+  padding : 15px;
+  padding-right: 30px;
+  border-top : 1px groove #FBF2B7 ;
+  background-image: url("http://2.bp.blogspot.com/-tu9IiXvfUZ4/U8En0gxX1pI/AAAAAAAAfXs/dusgGKLlOB4/s1920/Walls_Galaxy_S5_123.jpg");
+}
+
+footer p {
+  margin : 0px;
+  color: #FFFFFF;
+  text-align: end;
+  font-style: italic;
+}
+
+.paraph {
+  padding : 50px;
+  text-align: center;
+}
+
