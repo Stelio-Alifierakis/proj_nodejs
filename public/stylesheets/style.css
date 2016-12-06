@@ -41,6 +41,7 @@ nav {
   background-color : #111111;
   width : auto; ;
   clear : both;
+  text-align: center;
 }
 
 nav li {
@@ -57,16 +58,15 @@ nav a {
   color : #FBF2B7
 }
 nav a:hover{
-  background-color:#FFF;color : #050;}
+  background-color:#FBF2B7;color : #FF0000;}
 
 #gauche {
-  /*background-color: #0EE;*/
-  background-image:
-          url("http://www.psycheduweb.fr/wp-content/uploads/2011/06/fond-gris-degrade.jpg");
+  background-color: #FBF2B7;
   float: left;
   width : 20%;
   height: 700px;
-
+  margin-left : 1%;
+  margin-right: 1%;
 }
 
 #gauche:after {
@@ -78,15 +78,16 @@ nav a:hover{
 #main {
   /*background-color: #0E0; */
   /*background-image: url("http://images.frandroid.com/wp-content/uploads/2016/02/galaxy-s7-edge-2-knox.jpg");*/
-  float: left;
-  width: 60%;
+  float:left;
+  align-content: center;
+  width: 56%;
 }
 
 #main h2 {
   text-align: center;
   padding : 20px;
   border-bottom: 4px groove #FBF2B7;
-  margin : 0 auto;;
+  margin : 0 auto;
 }
 
 #main:after {
@@ -97,11 +98,13 @@ nav a:hover{
 
 #droite {
   /*background-color: #FF8800;*/
-  background-image:
-  url("http://www.psycheduweb.fr/wp-content/uploads/2011/06/fond-gris-degrade.jpg");
+  background-color: #FBF2B7;
   float: right;
   width : 20%;
   overflow: auto;
+  color : #111111;
+  margin-left : 1%;
+  margin-right: 1%;
 }
 
 #droite:after {
@@ -117,15 +120,31 @@ nav a:hover{
   margin : 10px;
 }
 
-.produit ul{
+.navProd {
+  border : 1px groove #111111;
+  margin : 10px;
+  text-align: center;
+}
+
+.produitDetail {
+}
+
+.navProd ul{
   padding-left: 10px;
   list-style : none;
   padding : 0;
   margin:0;
 }
 
+.produit ul{
+   padding-left: 10px;
+   list-style : none;
+   padding : 0;
+   margin:0;
+ }
+
 #main:first-letter {
-  font-size:1.05em;
+  font-size:2rem;
   font-weight:bold;
 }
 
@@ -141,6 +160,11 @@ nav a:hover{
 .headerProduit {
 
   border-bottom : 1px groove #FBF2B7;
+  padding: 5px;
+}
+
+.navHeader {
+  border-bottom : 1px groove #111111;
   padding: 5px;
 }
 
@@ -163,7 +187,7 @@ h3 {
 }
 
 h3:first-letter{
-  font-size:1.25em;
+  font-size:1.5rem;
   font-weight:bold;
 }
 
@@ -173,6 +197,7 @@ a {
 
 p.p_desc {
   clear : both ;
+  margin-top : 30px;
 }
 
 footer {
@@ -190,7 +215,24 @@ footer p {
 }
 
 .paraph {
-  padding : 50px;
+  padding : 25px;
   text-align: center;
+}
+
+.produitDetail {
+  text-align: justify;
+}
+
+.produitDetail ul {
+  float: left;
+
+}
+
+.produitDetail img {
+  float: left;
+  margin : 5px;
+  padding : 1px;
+  border: 1px solid #FBF2B7;
+  /*background-color: #FBF2B7;*/
 }
 
