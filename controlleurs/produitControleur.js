@@ -20,7 +20,6 @@ module.exports.categoriesControleur =function (req, res, next) {
         res.render('categories',{tab_categories : categories});
     })
 
-
 }
 
 module.exports.rechercheControleur =function (req, res, next) {
@@ -56,4 +55,10 @@ module.exports.getModifProduitControleur = function (req,res) {
 
     })
 
+}
+
+module.exports.categoriesProd = function (req,res) {
+    Produit.find({ categorie : req.params.id }, function(err,produit){
+        res.render('produits',{'tab_produits' : produit});
+    })
 }

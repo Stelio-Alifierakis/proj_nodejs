@@ -24,6 +24,8 @@ router.get('/',produitController.produitControleur) ;
 
 router.get('/categories',produitController.categoriesControleur);
 
+router.get('/categories/:id',produitController.categoriesProd);
+
 router.get('/recherche',produitController.rechercheControleur);
 
 router.get('/supprimerProduit/:id',produitController.getSupprimerProduitControleur);
