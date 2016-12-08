@@ -21,6 +21,7 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
+//gerere les article dans les produits
 app.use(function(req,res,next) {
   Produit.find(function (err,prod) {
     res.locals.produits = prod;
@@ -28,57 +29,30 @@ app.use(function(req,res,next) {
   })
 });
 
-/*
-app.use(function(req,res,next) {
-  Produit.find(function (err,random) {
-    res.locals.aleatoires = random ;
-    next();
-
-  }).limit(50).skip(rand()) * Produit.count();
-
-});*/
-
-/*
-var countProduit = function(){
-  Produit.count(function(err, c) {
-    Produit.equal(3, c)
-  });
-};*/
-
-var randomProd = function(min,max) {
-
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  //console.log(2);
-  return (max);
-  //console.log(countProduit());
-  //console.log(1);
-  //return Math.floor(Math.random() * (max - min + 1)) + min;
-  //return (1) ;
-};
-
-
 app.use(function(req,res,next){
   Produit.find(function (err,prodRand){
     res.locals.prodds = prodRand ;
     next();
   })
-  //randomProd() ;
-  //console.log(randomProd(1,res.locals.produits.length));
 });
 
+// génère les 3 articles aléatoirement dans la banière (#droite)
 app.use(function (req,res,next) {
   var x;
+  var i=0;
   res.locals.aleatoireProd = [] ;
-  for (var i=0; i <3; i++){
-    x = Math.floor(Math.random() * (res.locals.produits.length));
-    res.locals.aleatoireProd.push(res.locals.produits[x]);
-    res.locals.produits.splice(res.locals.produits[x],1);
+  x = Math.floor(Math.random() * (res.locals.produits.length));
+  while(i!=3) {
+    if(res.locals.produits[x] != "")
+    {
+      res.locals.aleatoireProd.push(res.locals.produits[x]);
+      res.locals.produits[x] = "" ;
+      i++;
+    }
+    else x = Math.floor(Math.random() * (res.locals.produits.length));
+
     console.log("nombre = "+ x);
-    //console.log(res.locals.produits[x]);
   }
-  //console.log(res.locals.produits[x]);
-  //console.log(res.locals.aleatoireProd.length);
   next();
 })
 
@@ -92,18 +66,6 @@ app.use('/', index);
 app.use('/users', users);
 app.use('/produits',produit);
 app.use('/utilisateur', utilisateur);
-
-
-/*var myLogger = function (req, res, next) {
-  console.log('LOGGED');
-  next();
-};*/
-
-
-
-
-//générer les 3 articles aléatoirements.
-
 
 app.use(function(req,res,next){
   Categorie.find(function (err,cat){
