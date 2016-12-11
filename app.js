@@ -5,6 +5,12 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var passport = require ('passport');
+var LocalStrategie = require ('./passport/connexion');
+var expressSession = require ('express-session');
+var initPassport = require ('./passport/init');
+var flash = require ('connect-flash');
+
 var index = require('./routes/index');
 var users = require('./routes/users');
 var produit = require('./routes/produits');
@@ -26,18 +32,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(expressSession({
+    secret: 'mySecretKey',
+    resave: true,
+    saveUninitialized: true
+}));
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
+
+initPassport(passport);
+
+var login = require ('./routes/login')(passport);
+
 app.use('/', index);
 app.use('/users', users);
 app.use('/produits',produit);
 app.use('/utilisateur', utilisateur);
-
-app.use(function(req,res,next){
-  Categorie.find(function (err,cat){
-
-    res.locals.Categoriesss = cat;
-    next();
-  })
-});
+app.use('/login',login);
 
 
 // catch 404 and forward to error handler

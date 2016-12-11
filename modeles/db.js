@@ -5,8 +5,8 @@ var mongoose = require('mongoose');
 var gracefulShutdown;
 
 //var dbURI = 'mongodb://localhost:27017/liens';
-//var dbURI = 'mongodb://192.168.99.100:27017/produit';
-var dbURI = 'mongodb://10.1.216.106:27017/produit';
+var dbURI = 'mongodb://192.168.99.100:27017/produit';
+//var dbURI = 'mongodb://10.1.216.106:27017/produit';
 if (process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
