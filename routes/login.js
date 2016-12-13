@@ -27,8 +27,14 @@ module.exports = function(passport){
     }));
 
     router.get('/home',isAuthenticated, function(req,res){
+        //console.log(req.user);
         res.render('profil', { user : req.user } );
     });
+
+    router.get('/logout', function(req,res){
+        req.logout();
+        res.redirect('/');
+    })
 
     return router;
 }

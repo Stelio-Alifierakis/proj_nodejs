@@ -57,7 +57,7 @@ app.use(function (req,res,next) {
     }
     else x = Math.floor(Math.random() * (res.locals.produits.length));
 
-    console.log("nombre = "+ x);
+    //console.log("nombre = "+ x);
   }
   next();
 })
@@ -76,9 +76,18 @@ app.use(expressSession({
 
 app.use(passport.initialize());
 app.use(passport.session());
+
 app.use(flash());
 
 initPassport(passport);
+
+app.use(function (req,res,next){
+    console.log('1');
+    res.locals.login = req.isAuthenticated();
+    res.locals.utilisateur = req.user;
+    console.log(res.locals.login);
+    next();
+});
 
 var login = require ('./routes/login')(passport);
 
@@ -87,7 +96,6 @@ app.use('/users', users);
 app.use('/produits',produit);
 app.use('/utilisateur', utilisateur);
 app.use('/login',login);
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

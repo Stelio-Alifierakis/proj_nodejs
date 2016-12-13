@@ -23,15 +23,24 @@ html(lang='fr')
               a(href="/produits/categories") Catégories
             li
               a(href="/produits/recherche") Recherche
-            li
-              a(href="/utilisateur/panier") Mon panier
-            li
-              a(href="/utilisateur/profil") Mon profil
-            li
-              a(href="/login") Connexion
+            if login
+              li
+                a(href="/utilisateur/panier") Mon panier
+              li
+                a(href="/login/home") #{utilisateur.pseudo}
+              li
+                a(href="/login/logout") Déconnexion
+            else
+              li
+                a(href="/login") Connexion
       #gauche
-        p  Bonjour gauche
+        p
+          toto-------------------------------------------------------------
+        p
+          utilisateur.pseudo
       #droite
+        if utilisateur!=undefined
+          p #{utilisateur.pseudo}
         if produits!=undifined
           for produit,i in aleatoireProd
 

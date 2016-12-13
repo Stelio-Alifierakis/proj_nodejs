@@ -5,13 +5,10 @@
 
 require('../modeles/db');
 
-
-
 module.exports.produitControleur =function (req, res, next) {
     Produit.find(function (err,produit) {
         res.render('produits',{'tab_produits' : produit});
     })
-
 
 }
 
