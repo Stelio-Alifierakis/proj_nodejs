@@ -34,4 +34,6 @@ router.post('/modifProduit/:id',produitController.postModifProduit);
 
 router.get('/editerProduit/:id',produitController.getModifProduitControleur) ;
 
+router.get('/detail/:id',produitController.detailProduitControleur) ;
+
 module.exports = router;

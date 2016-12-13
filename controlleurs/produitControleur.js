@@ -62,3 +62,8 @@ module.exports.categoriesProd = function (req,res) {
     })
 }
 
+module.exports.detailProduitControleur = function (req,res) {
+    Produit.findById(req.params.id, function(err,produit){
+        res.render('detailProduit',{'tab_produits' : produit});
+    })
+}

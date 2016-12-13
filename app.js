@@ -26,6 +26,42 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+
+//gerere les article dans les produits
+app.use(function(req,res,next) {
+  Produit.find(function (err,prod) {
+    res.locals.produits = prod;
+    next();
+  })
+});
+
+app.use(function(req,res,next){
+  Produit.find(function (err,prodRand){
+    res.locals.prodds = prodRand ;
+    next();
+  })
+});
+
+// génère les 3 articles aléatoirement dans la banière (#droite)
+app.use(function (req,res,next) {
+  var x;
+  var i=0;
+  res.locals.aleatoireProd = [] ;
+  x = Math.floor(Math.random() * (res.locals.produits.length));
+  while(i!=3) {
+    if(res.locals.produits[x] != "")
+    {
+      res.locals.aleatoireProd.push(res.locals.produits[x]);
+      res.locals.produits[x] = "" ;
+      i++;
+    }
+    else x = Math.floor(Math.random() * (res.locals.produits.length));
+
+    console.log("nombre = "+ x);
+  }
+  next();
+})
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

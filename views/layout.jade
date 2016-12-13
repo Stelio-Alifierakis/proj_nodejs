@@ -32,8 +32,18 @@ html(lang='fr')
       #gauche
         p  Bonjour gauche
       #droite
-        p  Bonjour droite
+        if produits!=undifined
+          for produit,i in aleatoireProd
 
+            .navProd
+              a(href="/produits/detail/"+produit.id)
+                .navHeader
+                  h3 #{produit.nom}
+                  p
+                  img(src='#{produit.image}', alt='non disponible', height='100', width='100')
+                  ul
+                    li  Prix : &nbsp;
+                      b #{produit.prix} €
       #main
         block titre
         block content
