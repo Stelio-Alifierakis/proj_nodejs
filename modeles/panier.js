@@ -4,7 +4,9 @@
 var mongoose = require('mongoose')
     ,Schema = mongoose.Schema;
 
-var Utilisateur = require('./utilisateur');
+//var Utilisateur = require('./utilisateur');
+
+
 
 var PanierSchema = new mongoose.Schema({
     utilisateur : { type : String, required: true, unique: true },

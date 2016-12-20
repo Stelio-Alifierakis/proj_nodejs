@@ -12,7 +12,8 @@ block content
                         b #{tab_produits.prix} €
                     li Catégorie : #{tab_produits.categorie}
             p.p_desc Description : #{tab_produits.description}
-
-            a(href="/produits/editerProduit/" + tab_produits.id) Editer le produit
-            br
-            a(href="/produits/supprimerProduit/" + tab_produits.id) Supprimer le produit
+            if utilisateur != undefined
+                if utilisateur.role == "admin"
+                    a(href="/produits/editerProduit/" + tab_produits.id) Editer le produit
+                    br
+                    a(href="/produits/supprimerProduit/" + tab_produits.id) Supprimer le produit

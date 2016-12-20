@@ -5,8 +5,10 @@ block titre
 block content
   p layout des produits
 
-  p
-    a(href="/utilisateur/creerProduit") Ajouter un produit
+  if utilisateur != undefined
+    if utilisateur.role == "admin"
+      p
+        a(href="/utilisateur/creerProduit") Ajouter un produit
 
   for produit,i in tab_produits
     .produit
@@ -19,7 +21,10 @@ block content
               b #{produit.prix} €
           li Catégorie : #{produit.categorie}
       p.p_desc Description : #{produit.description}
-
-      a(href="/produits/editerProduit/" + produit.id) Editer le produit
-      br
-      a(href="/produits/supprimerProduit/" + produit.id) Supprimer le produit
+      p
+        a(href="/produits/detail/"+produit.id) Voir détails
+      if utilisateur != undefined
+        if utilisateur.role == "admin"
+          a(href="/produits/editerProduit/" + produit.id) Editer le produit
+          br
+          a(href="/produits/supprimerProduit/" + produit.id) Supprimer le produit
