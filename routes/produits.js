@@ -28,6 +28,8 @@ router.get('/categories/:id',produitController.categoriesProd);
 
 router.get('/recherche',produitController.rechercheControleur);
 
+router.post('/recherche',produitController.rechercheProduitControleur);
+
 router.get('/supprimerProduit/:id',produitController.getSupprimerProduitControleur);
 
 router.post('/modifProduit/:id',produitController.postModifProduit);

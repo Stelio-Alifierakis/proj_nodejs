@@ -4,6 +4,8 @@
 var mongoose = require('mongoose')
     ,Schema = mongoose.Schema;
 
+var mongoosastic = require('mongoosastic');
+
 var Categories = require('./categories');
 
 var ProduitSchema = new mongoose.Schema({
@@ -15,4 +17,14 @@ var ProduitSchema = new mongoose.Schema({
     image : { type : String }
 });
 
-module.exports = mongoose.model('Produit',ProduitSchema);
+ProduitSchema.plugin(mongoosastic, {
+    hosts: [
+        "192.168.99.100:9200"
+    ]
+});
+
+const Produit = mongoose.model("Produit", ProduitSchema);
+
+Produit.synchronize();
+
+module.exports = Produit ;

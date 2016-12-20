@@ -67,3 +67,47 @@ module.exports.detailProduitControleur = function (req,res) {
         res.render('detailProduit',{'tab_produits' : produit});
     })
 }
+
+module.exports.rechercheProduitControleur=function(req,res){
+    Produit.search({
+       /* "query": {
+            "match": {
+                "nom": req.body.rechercheNom
+            }
+        } */
+       "query": {
+           "bool": {
+               "should": [
+                   {    "match": {
+                           "nom": {
+                               "query": req.body.rechercheNom
+                           }}},
+                   {    "match": {
+                            "description": {
+                                "query": req.body.rechercheNom
+                       }}}
+               ]
+           }
+       }
+    },function (err,results) {
+
+            var tab_result = [] ;
+            for (var i = 0; i< results.hits.hits.length;i++) {
+                var rech = [];
+                //console.log(res.hits.hits._id)
+                rech['id'] = results.hits.hits[i]._id;
+                rech['image'] = results.hits.hits[i]._source.image;
+                rech['description'] = results.hits.hits[i]._source.description;
+                rech['categorie'] = results.hits.hits[i]._source.categorie;
+                rech['prix'] = results.hits.hits[i]._source.prix;
+                rech['nom'] = results.hits.hits[i]._source.nom;
+
+                tab_result.push(rech);
+                console.log(rech);
+            }
+            //var recherche = res.hits.hits ;
+            //console.log(tab_result);
+            res.render('recherche',{tab_recherche : tab_result});
+
+    })
+}

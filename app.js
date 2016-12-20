@@ -57,7 +57,7 @@ app.use(function (req,res,next) {
     }
     else x = Math.floor(Math.random() * (res.locals.produits.length));
 
-    console.log("nombre = "+ x);
+    //console.log("nombre = "+ x);
   }
   next();
 })
