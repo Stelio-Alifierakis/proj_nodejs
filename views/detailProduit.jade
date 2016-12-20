@@ -17,3 +17,11 @@ block content
                     a(href="/produits/editerProduit/" + tab_produits.id) Editer le produit
                     br
                     a(href="/produits/supprimerProduit/" + tab_produits.id) Supprimer le produit
+            if utilisateur!=undefined
+                form(method='post',action="/utilisateur/panier")
+                    p
+                        label(for='quantite') Nombre de produit à acheter :
+                        input#quantite(type='number', name='quantite', size='30', maxlength='20' value="1")
+                        input(type='hidden',name='user',value="#{utilisateur.pseudo}")
+                        input(type='hidden',name='prod',value="#{tab_produits.id}")
+                        input(type="submit",value="Valider")

@@ -33,6 +33,8 @@ router.get('/creerProduit',utilisateurController.addProduitControleur);
 
 router.get('/creerCategorie',utilisateurController.addCategorieControleur);
 
+router.post('/panier',utilisateurController.addProduitPanier);
+
 router.post('/creerCategorie',utilisateurController.creerLienControleur);
 
 router.post('/creerProduit',utilisateurController.creerProduitLienControleur);

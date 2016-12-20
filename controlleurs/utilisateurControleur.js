@@ -25,6 +25,44 @@ module.exports.panierControleur =function (req, res, next) {
 
 }
 
+module.exports.addProduitPanier =function (req, res, next) {
+
+    /*Panier.findOne({ utilisateur : req.body.nomUtilisateur }, { sort : { date : -1 } }, function (err,pan){
+        if(err) console.error(err);
+        console.log(pan);
+
+        if(pan!=undefined){
+
+        }
+        else{
+            Produit.findOne({ _id: req.body.prod }, function (err,produit) {
+                if(err) console.error(err);
+
+                var panier = new Panier ();
+                panier.utilisateur=req.body.user;
+                panier.status="en cours";
+                //panier.date=;
+            });
+
+        }
+
+    });
+
+    /*if(Panier.findOne({ utilisateur : req.body.nomUtilisateur }, { sort : { date : -1 } })!=undefined){
+        console.log(req.body.quantite + req.body.user);
+    }
+    else{
+        console.log("test");
+        //console.log(req.body.quantite + " petite phrase pour savoir où se trouve le problème " + req.body.user);
+        var panier = new Panier({
+
+        });
+    }*/
+
+    res.render('panier');
+
+}
+
 module.exports.addProduitControleur =function (req, res, next) {
     Categorie.find(function (err,categories) {
         res.render('addProduit', {tab_categories: categories});

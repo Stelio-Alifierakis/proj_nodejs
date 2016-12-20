@@ -4,7 +4,9 @@
 var mongoose = require('mongoose')
     ,Schema = mongoose.Schema;
 
-var Categories = require('./categories');
+//var Categories = require('./categories');
+
+require('./panier');
 
 var ProduitSchema = new mongoose.Schema({
     nom : { type : String, required: true, unique: true },
@@ -12,6 +14,7 @@ var ProduitSchema = new mongoose.Schema({
     description : { type : String },
     //categorie : [{ type : Schema.Types.ObjectId, ref: 'Categories' }],
     categorie : { type : String, required: true},
+    panier : [{type: Schema.Types.ObjectId, ref: 'ProdPanierSchema'}],
     image : { type : String }
 });
 

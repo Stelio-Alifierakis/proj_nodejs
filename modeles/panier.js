@@ -4,14 +4,18 @@
 var mongoose = require('mongoose')
     ,Schema = mongoose.Schema;
 
-//var Utilisateur = require('./utilisateur');
+require('./produit');
 
-
+var ProdPanierSchema= new mongoose.Schema({
+    produit : [{ type: Schema.Types.ObjectId, ref: 'Produit' }],
+    quantite : { type: Number }
+});
 
 var PanierSchema = new mongoose.Schema({
     utilisateur : { type : String, required: true, unique: true },
-    produit : { type : String },
-    statut : { type : String, required: true, unique: true }
+    produit : [ProdPanierSchema],
+    statut : { type : String, required: true, unique: true },
+    date : { type : Date, required: true }
 });
 
 module.exports = mongoose.model('Panier',PanierSchema);
