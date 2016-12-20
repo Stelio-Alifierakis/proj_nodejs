@@ -2,6 +2,24 @@ extends layout
 block titre
   h2 Recherche
 block content
-  form
+  form(method='post' action='/produits/recherche')
     input(type="text" name="rechercheNom" placeholder="Recherche")
     input(type="submit" value="Valider")
+
+  if tab_recherche!=undefined
+    for produit,i in tab_recherche
+      .produit
+        .headerProduit
+          h3 #{produit.nom}
+        p
+          img(src='#{produit.image}', alt='non disponible', height='80', width='80')
+          ul
+            li  Prix : &nbsp;
+              b #{produit.prix} €
+            li Catégorie : #{produit.categorie}
+        p.p_desc Description : #{produit.description}
+        if utilisateur != undefined
+          if utilisateur.role == "admin"
+            a(href="/produits/editerProduit/" + produit.id) Editer le produit
+            br
+            a(href="/produits/supprimerProduit/" + produit.id) Supprimer le produit
