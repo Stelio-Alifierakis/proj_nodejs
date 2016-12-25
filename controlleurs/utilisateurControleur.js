@@ -4,6 +4,7 @@
 
 require('../modeles/db');
 var bcrypt = require('bcryptjs');
+require('passport');
 
 module.exports.inscriptionControleur =function (req, res, next) {
     res.render('inscription');
@@ -73,48 +74,78 @@ module.exports.addCategorieControleur =function (req, res, next) {
         res.render('addCategorie');
 }
 
-module.exports.creerLienControleur =function (req, res, next) {
+module.exports.postCreerCategorie =function (req, res, next) {
 
-    var cat = new Categorie ();
+    var utilisateur=req.user;
+    if(utilisateur!=undefined && utilisateur.role=="admin"){
+        var cat = new Categorie ();
 
-    cat.nom = req.body.Nom;
-    cat.description = req.body.Description;
-    cat.save();
+        cat.nom = req.body.Nom;
+        cat.description = req.body.Description;
+        cat.save();
 
-    res.redirect('/produits/categories');
+        res.redirect('/produits/categories');
+    }
+    else{
+        res.redirect('/wtf');
+    }
 
 }
 
 module.exports.creerProduitLienControleur =function (req, res, next) {
-    var prod = new Produit ();
 
-    prod.nom = req.body.Nom;
-    prod.prix = req.body.Prix;
-    prod.categorie=req.body.Categoriess;
-    prod.description = req.body.Description;
-    if(req.body.Image == ""){
-    prod.image = '/images/box.png';
-    }
-    else{
-        prod.image = req.body.Image;
-    }
+    var utilisateur=req.user;
+        if(utilisateur!=undefined && utilisateur.role=="admin"){
 
-    prod.save();
-    res.redirect('/');
+            var prod = new Produit ();
+            var nbre = parseInt(req.body.Prix);
+
+            if(nbre>1000000){
+                console.log('test');
+                prod.prix = 1000000;
+            }
+            else{
+                console.log('essai');
+                prod.prix = req.body.Prix;
+            }
+
+            prod.nom = req.body.Nom;
+            //prod.prix = req.body.Prix;
+            prod.categorie=req.body.Categoriess;
+            prod.description = req.body.Description;
+            if(req.body.Image == ""){
+                prod.image = '/images/box.png';
+            }
+            else{
+                prod.image = req.body.Image;
+            }
+
+            prod.save();
+            res.redirect('/');
+
+
+        }
+        else{
+            res.redirect("/wtf");
+        }
 
 }
 
 module.exports.postinscriptionControleur =function (req, res, next) {
-    var user = new Utilisateur ();
-    var salt = bcrypt.genSaltSync(10);
-    var hash = bcrypt.hashSync(req.body.mdpUtilisateur,salt);
 
-    user.pseudo = req.body.nomUtilisateur;
-    user.mdp = hash;
-    user.role='user';
-    user.avatar = '/images/anonyme.jpg';
+    if(req.body.nomUtilisateur!=undefined && req.body.mdpUtilisateur!=undefined){
+        var user = new Utilisateur ();
+        var salt = bcrypt.genSaltSync(10);
+        var hash = bcrypt.hashSync(req.body.mdpUtilisateur,salt);
 
-    user.save();
+        user.pseudo = req.body.nomUtilisateur;
+        user.mdp = hash;
+        user.role='user';
+        user.avatar = '/images/anonyme.jpg';
+
+        user.save();
+    }
+
     res.redirect('/');
 
 }

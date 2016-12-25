@@ -4,27 +4,29 @@ block titre
   h2 Ajouter un produit
 
 block content
+    if utilisateur != undefined
+        if utilisateur.role == "admin"
+            form(method='post',action="#{tab_produits!=undefined?'/produits/modifProduit/' + tab_produits.id:'/utilisateur/creerProduit'}")
+                p
+                    label(for='Nom') Nom :
+                    input#Nom(type='text', name='Nom', placeholder='Nom du Produit', size='30', maxlength='20', value="#{tab_produits!=undefined?tab_produits.nom: ' '}")
 
-    form(method='post',action="#{tab_produits!=undefined?'/produits/modifProduit/' + tab_produits.id:'/utilisateur/creerProduit'}")
-        p
-            label(for='Nom') Nom :
-            input#Nom(type='text', name='Nom', placeholder='Nom du Produit', size='30', maxlength='20', value="#{tab_produits!=undefined?tab_produits.nom: ' '}")
+                p
+                    label(for='Prix') Prix :
+                    input#Prix(type='number', name='Prix', placeholder='Prix du Produit',min='0', value="#{tab_produits!=undefined?tab_produits.prix: ' '}")
+                p
+                    label(for='Description') Description :
+                    textarea#description(type='text', name='Description', placeholder='Description du Produit', size='40', value="#{tab_produits!=undefined?tab_produits.description: ' '}")
+                p
+                    label(for='Categoriess') Categorie :
+                    select#Categoriess(name='Categoriess')
 
-        p
-            label(for='Prix') Prix :
-            input#Prix(type='number', name='Prix', placeholder='Prix du Produit',min='0', value="#{tab_produits!=undefined?tab_produits.prix: ' '}")
-        p
-            label(for='Description') Description :
-            textarea#description(type='text', name='Description', placeholder='Description du Produit', size='40', value="#{tab_produits!=undefined?tab_produits.description: ' '}")
-        p
-            label(for='Categoriess') Categorie :
-            select#Categoriess(name='Categoriess')
+                        for categorie,i in tab_categories
+                            option #{categorie.nom}
 
-                for categorie,i in tab_categories
-                    option #{categorie.nom}
-
-        p
-            label(for='image') Image (lien) :
-            input#image(type='url', name='Image', placeholder='Lien de l image', size='30', maxlength='255', value="#{tab_produits!=undefined?tab_produits.image: ' '}")
-        p
-            input(type="submit",value="Valider")
+                p
+                    label(for='image') Image (lien) :
+                    input#image(type='url', name='Image', placeholder='Lien de l image', size='30', maxlength='255', value="#{tab_produits!=undefined?tab_produits.image: ' '}")
+                p
+                    input(type='hidden', name="users", value='#{utilisateur.id}')
+                    input(type="submit",value="Valider")

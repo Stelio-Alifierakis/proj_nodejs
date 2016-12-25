@@ -4,6 +4,7 @@
  */
 
 require('../modeles/db');
+require('passport');
 
 module.exports.produitControleur =function (req, res, next) {
     Produit.find(function (err,produit) {
@@ -27,36 +28,58 @@ module.exports.rechercheControleur =function (req, res, next) {
 module.exports.getSupprimerProduitControleur=function(req,res){
     /*tab_liens.splice(req.params.id);
      res.redirect('/Liens');*/
-    Produit.findOneAndRemove({_id : req.params.id},function (err) {
-            if(err) console.error(err);
-            res.redirect('/produits');
-        }
-    );
+    var utilisateur=req.user;
+    if(utilisateur!=undefined && utilisateur.role=="admin"){
+        Produit.findOneAndRemove({_id : req.params.id},function (err) {
+                if(err) console.error(err);
+                res.redirect('/produits');
+            }
+        );
+    }
+    else{
+        res.redirect('/wtf');
+    }
+
 }
 
 module.exports.postModifProduit = function(req,res){
-    var prod = {nom: req.body.Nom, prix: req.body.Prix, description: req.body.Description, image: req.body.Image, categorie: req.body.Categoriess};
-    Produit.findByIdAndUpdate(req.params.id,prod,function (err,obj){
-        if(err) console.error(err);
-        console.log(obj);
-    });
-    res.redirect('/produits');
+
+    var utilisateur=req.user;
+        if(utilisateur!=undefined && utilisateur.role=="admin"){
+            var prod = {nom: req.body.Nom, prix: req.body.Prix, description: req.body.Description, image: req.body.Image, categorie: req.body.Categoriess};
+            Produit.findByIdAndUpdate(req.params.id,prod,function (err,obj){
+                if(err) console.error(err);
+                console.log(obj);
+                res.redirect('/produits');
+            });
+
+    }
+    else{
+        res.redirect('/wtf');
+    }
+
 }
 
 module.exports.getModifProduitControleur = function (req,res) {
-    Produit.findById(req.params.id,function (err,produit) {
-        Categorie.find(function (err,cat){
-            if(err) console.error(err);
-            res.render('addProduit',{'tab_produits' : produit, 'tab_categories' : cat}) ;
+    var utilisateur=req.user;
+    if(utilisateur!=undefined && utilisateur.role=="admin"){
+        Produit.findById(req.params.id,function (err,produit) {
+            Categorie.find(function (err,cat){
+                if(err) console.error(err);
+                res.render('addProduit',{'tab_produits' : produit, 'tab_categories' : cat}) ;
+            })
         })
-    })
+    }
+    else{
+        res.redirect('/wtf');
+    }
 
 }
 
 module.exports.categoriesProd = function (req,res) {
-    Produit.find({ categorie : req.params.id }, function(err,produit){
-        res.render('produits',{'tab_produits' : produit});
-    })
+        Produit.find({ categorie : req.params.id }, function(err,produit){
+            res.render('produits',{'tab_produits' : produit});
+        })
 }
 
 module.exports.detailProduitControleur = function (req,res) {

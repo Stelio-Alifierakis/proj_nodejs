@@ -2,7 +2,7 @@ extends layout
 block titre
   h2 Creation de compte
 block content
-  form(method='post',action="#/utilisateur/inscription")
+  form(method='post',action="/utilisateur/inscription")
     //
       input(type="text" name="nomUtilisateur" placeholder="Nom d'utilisateur")
       input(type="password", name="mdpUtilisateur", placeholder='Entrez votre mot de passe')

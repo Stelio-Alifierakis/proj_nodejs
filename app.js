@@ -15,6 +15,7 @@ var index = require('./routes/index');
 var users = require('./routes/users');
 var produit = require('./routes/produits');
 var utilisateur = require('./routes/utilisateur');
+var wtf= require('./routes/wtf');
 
 require('./modeles/db');
 
@@ -96,6 +97,7 @@ app.use('/users', users);
 app.use('/produits',produit);
 app.use('/utilisateur', utilisateur);
 app.use('/login',login);
+app.use('/wtf',wtf);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
