@@ -28,37 +28,66 @@ module.exports.panierControleur =function (req, res, next) {
 
 module.exports.addProduitPanier =function (req, res, next) {
 
-    /*Panier.findOne({ utilisateur : req.body.nomUtilisateur }, { sort : { date : -1 } }, function (err,pan){
-        if(err) console.error(err);
-        console.log(pan);
+    var utilisateur=req.user;
+    if(utilisateur!=undefined){
 
-        if(pan!=undefined){
+        Panier.findOne({
+            utilisateur: req.user.pseudo,
+            statut: 'en cours'
+        }, function (err,pan){
+            if(err) console.error(err);
 
-        }
-        else{
-            Produit.findOne({ _id: req.body.prod }, function (err,produit) {
-                if(err) console.error(err);
+            if(pan==undefined){
+                var panierCreation = new Panier();
 
-                var panier = new Panier ();
-                panier.utilisateur=req.body.user;
-                panier.status="en cours";
-                //panier.date=;
-            });
+                panierCreation.utilisateur=req.user.pseudo;
+                panierCreation.statut='en cours';
+                panierCreation.date=Date.now();
 
-        }
+                panierCreation.produit.push({
+                    produit: req.body.prod,
+                    quantite: req.body.quantites
+                });
 
-    });
+                /*var newProd =panierCreation.produit.create({
+                    produit: req.body.prod,
+                    quantite: req.body.quantite,
+                });*/
 
-    /*if(Panier.findOne({ utilisateur : req.body.nomUtilisateur }, { sort : { date : -1 } })!=undefined){
-        console.log(req.body.quantite + req.body.user);
-    }
-    else{
-        console.log("test");
-        //console.log(req.body.quantite + " petite phrase pour savoir où se trouve le problème " + req.body.user);
-        var panier = new Panier({
+                panierCreation.save();
+            }
+            else{
+
+                Panier.findOne({
+                    utilisateur: req.user.pseudo,
+                    statut: 'en cours',
+                    'produit.produit':  req.body.prod
+                },function (err,prodTrouve){
+                    if(err) console.error(err);
+
+                    if(prodTrouve==undefined){
+
+                        pan.produit.push({
+                            produit: req.body.prod,
+                            quantite: req.body.quantites
+                        });
+
+                        pan.save();
+
+                    }
+                    else{
+                        //var produitAChanger = new Panier.produit();
+                        console.log(prodTrouve);
+                        //prodTrouve.produit.quantite=req.body.quantites;
+                        pan.save();
+                    }
+                }).update();
+            }
+
 
         });
-    }*/
+
+    }
 
     res.render('panier');
 
@@ -123,7 +152,6 @@ module.exports.creerProduitLienControleur =function (req, res, next) {
             prod.save();
             res.redirect('/');
 
-
         }
         else{
             res.redirect("/wtf");
@@ -132,8 +160,8 @@ module.exports.creerProduitLienControleur =function (req, res, next) {
 }
 
 module.exports.postinscriptionControleur =function (req, res, next) {
-
-    if(req.body.nomUtilisateur!=undefined && req.body.mdpUtilisateur!=undefined){
+    var utilisateur=req.user;
+    if(utilisateur==undefined && req.body.nomUtilisateur!=undefined && req.body.mdpUtilisateur!=undefined && req.body.mdpUtilisateur.length>5 && req.body.nomUtilisateur>5){
         var user = new Utilisateur ();
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.mdpUtilisateur,salt);
@@ -145,7 +173,6 @@ module.exports.postinscriptionControleur =function (req, res, next) {
 
         user.save();
     }
-
     res.redirect('/');
 
 }
@@ -160,8 +187,6 @@ module.exports.postConnexionControleur =function (req, res, next) {
         else{
             res.redirect('/produits');
         }
-
     })
-
 }
 

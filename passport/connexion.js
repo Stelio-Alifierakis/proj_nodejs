@@ -8,9 +8,10 @@ var bcrypt = require ('bcryptjs');
 
 module.exports = function (passport){
 
+
     passport.use('login',new LocalStrategie(
         function (username,password,done){
-            console.log(username + " " + password)
+            console.log(username + " " + password);
             Utilisateur.findOne({ 'pseudo' : username }, function (err,user){
                 if (err) { return done(err); }
 

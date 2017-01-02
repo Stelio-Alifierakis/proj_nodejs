@@ -7,7 +7,7 @@ var mongoose = require('mongoose')
 require('./produit');
 
 var ProdPanierSchema= new mongoose.Schema({
-    produit : [{ type: Schema.Types.ObjectId, ref: 'Produit' }],
+    produit : { type: Schema.Types.ObjectId, ref: 'Produit' },
     quantite : { type: Number }
 });
 

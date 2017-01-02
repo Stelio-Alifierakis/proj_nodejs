@@ -69,6 +69,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(flash());
+
 app.use(expressSession({
     secret: 'mySecretKey',
     resave: true,
@@ -78,15 +80,13 @@ app.use(expressSession({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(flash());
 
 initPassport(passport);
 
 app.use(function (req,res,next){
-    console.log('1');
     res.locals.login = req.isAuthenticated();
     res.locals.utilisateur = req.user;
-    console.log(res.locals.login);
+    //console.log(res.locals.login);
     next();
 });
 

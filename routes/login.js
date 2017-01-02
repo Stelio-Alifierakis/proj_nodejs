@@ -3,6 +3,7 @@
  */
 var express = require('express');
 //var produitController = require('../controlleurs/produitControleur') ;
+require('connect-flash');
 var router = express.Router();
 
 var isAuthenticated = function(req,res,next){
@@ -23,7 +24,7 @@ module.exports = function(passport){
     router.post('/',passport.authenticate('login', {
         successRedirect: '/login/home',
         failureRedirect: '/login',
-        failureFlash : true
+        failureFlash : 'test'
     }));
 
     router.get('/home',isAuthenticated, function(req,res){
