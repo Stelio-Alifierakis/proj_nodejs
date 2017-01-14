@@ -161,7 +161,10 @@ module.exports.creerProduitLienControleur =function (req, res, next) {
 
 module.exports.postinscriptionControleur =function (req, res, next) {
     var utilisateur=req.user;
-    if(utilisateur==undefined && req.body.nomUtilisateur!=undefined && req.body.mdpUtilisateur!=undefined && req.body.mdpUtilisateur.length>5 && req.body.nomUtilisateur>5){
+
+    console.log(utilisateur + "et" + req.body.nomUtilisateur + "et" + req.body.mdpUtilisateur + "et" + req.body.mdpUtilisateur.length + "et" + req.body.nomUtilisateur.length);
+
+    if(utilisateur==undefined && req.body.nomUtilisateur!=undefined && req.body.mdpUtilisateur!=undefined && req.body.mdpUtilisateur.length>5 && req.body.nomUtilisateur.length>5){
         var user = new Utilisateur ();
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.mdpUtilisateur,salt);
@@ -170,8 +173,11 @@ module.exports.postinscriptionControleur =function (req, res, next) {
         user.mdp = hash;
         user.role='user';
         user.avatar = '/images/anonyme.jpg';
-
+        console.log(user);
         user.save();
+    }
+    else{
+        console.log('inscription impossible');
     }
     res.redirect('/');
 

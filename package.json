@@ -16,7 +16,7 @@
     "express-session": "^1.14.2",
     "flash": "^1.1.0",
     "jade": "~1.11.0",
-    "mongoosastic": "^4.2.1",
+    "mongoosastic": "^4.2.4",
     "mongoose": "^4.7.5",
     "morgan": "~1.7.0",
     "passport": "^0.3.2",

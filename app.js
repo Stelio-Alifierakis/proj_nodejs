@@ -28,10 +28,12 @@ app.set('view engine', 'jade');
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 
-//gerere les article dans les produits
+//genere les article dans les produits
 app.use(function(req,res,next) {
   Produit.find(function (err,prod) {
-    res.locals.produits = prod;
+    if(prod!=undefined){
+      res.locals.produits = prod;
+    }
     next();
   })
 });
@@ -61,7 +63,7 @@ app.use(function (req,res,next) {
     //console.log("nombre = "+ x);
   }
   next();
-})
+});
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

@@ -35,14 +35,14 @@ var testAdmin = function(req,res,next){
 
 var testUser = function(req,res,next){
     var user=req.user;
-    if(user==undefined){
+    if(user!=undefined){
         return next();
     }
 
     res.redirect('/wtf');
 }
 
-router.get('/inscription', testUser,utilisateurController.inscriptionControleur);
+router.get('/inscription',utilisateurController.inscriptionControleur);
 
 router.get('/connexion',utilisateurController.connexionControleur) ;
 
@@ -54,13 +54,13 @@ router.get('/creerProduit',utilisateurController.addProduitControleur);
 
 router.get('/creerCategorie',testAdmin,utilisateurController.addCategorieControleur);
 
-router.post('/panier',utilisateurController.addProduitPanier);
+router.post('/panier', testUser,utilisateurController.addProduitPanier);
 
 router.post('/creerCategorie', testAdmin,utilisateurController.postCreerCategorie);
 
 router.post('/creerProduit',utilisateurController.creerProduitLienControleur);
 
-router.post('/inscription',testUser,utilisateurController.postinscriptionControleur);
+router.post('/inscription',utilisateurController.postinscriptionControleur);
 
 router.post('/connexion',utilisateurController.postConnexionControleur);
 
