@@ -35,7 +35,7 @@ var testAdmin = function(req,res,next){
 
 var testUser = function(req,res,next){
     var user=req.user;
-    if(user==undefined){
+    if(user!=undefined){
         return next();
     }
 
@@ -46,7 +46,7 @@ router.get('/inscription', testUser,utilisateurController.inscriptionControleur)
 
 router.get('/connexion',utilisateurController.connexionControleur) ;
 
-router.get('/panier',utilisateurController.panierControleur);
+router.get('/panier', testUser,utilisateurController.panierControleur);
 
 router.get('/profil',utilisateurController.profilControleur);
 

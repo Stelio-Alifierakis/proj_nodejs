@@ -12,10 +12,11 @@ var ProdPanierSchema= new mongoose.Schema({
 });
 
 var PanierSchema = new mongoose.Schema({
-    utilisateur : { type : String, required: true, unique: true },
+    utilisateur : { type : String, required: true },
     produit : [ProdPanierSchema],
-    statut : { type : String, required: true, unique: true },
-    date : { type : Date, required: true }
+    statut : { type : String, required: true },
+    date : { type : Date, required: true },
+    total : { type : Number }
 });
 
 module.exports = mongoose.model('Panier',PanierSchema);

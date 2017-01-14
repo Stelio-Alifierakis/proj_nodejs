@@ -31,6 +31,10 @@ module.exports.addProduitPanier =function (req, res, next) {
     var utilisateur=req.user;
     if(utilisateur!=undefined){
 
+
+
+
+
         Panier.findOne({
             utilisateur: req.user.pseudo,
             statut: 'en cours'
@@ -43,17 +47,12 @@ module.exports.addProduitPanier =function (req, res, next) {
                 panierCreation.utilisateur=req.user.pseudo;
                 panierCreation.statut='en cours';
                 panierCreation.date=Date.now();
-
+                panierCreation.total=0;
                 panierCreation.produit.push({
                     produit: req.body.prod,
                     quantite: req.body.quantites
                 });
-
-                /*var newProd =panierCreation.produit.create({
-                    produit: req.body.prod,
-                    quantite: req.body.quantite,
-                });*/
-
+                console.log(panierCreation);
                 panierCreation.save();
             }
             else{
@@ -76,21 +75,65 @@ module.exports.addProduitPanier =function (req, res, next) {
 
                     }
                     else{
-                        //var produitAChanger = new Panier.produit();
-                        console.log(prodTrouve);
-                        //prodTrouve.produit.quantite=req.body.quantites;
-                        pan.save();
+
+                        Panier.findOneAndUpdate( {_id : prodTrouve._id, 'produit.produit': req.body.prod }, {
+                            "$set" : { "produit.$.quantite" : req.body.quantites}
+                        }, function (err,prodd){} );
+
+                        //prodTrouve.save();
                     }
-                }).update();
+                });
+
+
+                var val=0;
+
+                Produit.findById(req.body.prod,function (err,prod){
+                    val=prod.prix;
+                });
+
+                var j=0;
+
+                Produit.findOne({
+                    utilisateur: req.user.pseudo,
+                    statut: 'en cours'
+                }, function (err,pan2){
+                    if(err) console.error(err);
+
+                    for(var i = 0 ; i<pan2.produit.length ; i++){
+                        console.log(i);
+                        console.log(pan2.produit[i].produit);
+                        var qt=pan2.produit[i].quantite;
+
+                        Produit.findOne({_id : pan2.produit[i].produit},function (err,prod){
+                            if(err) console.error(err);
+                            //console.log(prod.nom);
+                            val+=prod.prix*qt;
+                            var occu=pan2.produit.length - 1;
+                            console.log("test " + occu + " et " + j + " et " + val);
+
+                            if(j==occu){
+                                console.log("prout " + val);
+                                Panier.findOneAndUpdate({_id : pan2.id} , {$set : { total : val }}, function (err){
+                                    if(err) console.error(err);
+                                });
+                            }
+
+                            j++;
+
+                        });
+                    }
+
+                });
+
             }
 
 
+
+
         });
-
     }
-
-    res.render('panier');
-
+    res.redirect("/utilisateur/panier");
+    //res.render('index');
 }
 
 module.exports.addProduitControleur =function (req, res, next) {
