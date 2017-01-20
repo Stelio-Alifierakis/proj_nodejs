@@ -23,4 +23,5 @@ block content
                         label(for='quantite') Nombre de produit à acheter :
                         input#quantite(type='number', name='quantites', size='30', maxlength='20' value="1")
                         input(type='hidden',name='prod',value="#{tab_produits.id}")
+                        input(type='hidden',name='prix',value="#{tab_produits.prix}")
                         input(type="submit",value="Valider")

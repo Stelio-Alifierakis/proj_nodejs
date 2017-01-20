@@ -22,6 +22,9 @@ module.exports.profilControleur =function (req, res, next) {
 }
 
 module.exports.panierControleur =function (req, res, next) {
+
+    
+
     res.render('panier');
 
 }
@@ -31,104 +34,103 @@ module.exports.addProduitPanier =function (req, res, next) {
     var utilisateur=req.user;
     if(utilisateur!=undefined){
 
-
-
-
-
         Panier.findOne({
             utilisateur: req.user.pseudo,
             statut: 'en cours'
-        }, function (err,pan){
+        }).populate('produit.produit').exec(function (err,pan) {
             if(err) console.error(err);
 
-            if(pan==undefined){
+            if(pan==undefined){ //création du panier et ajout de celui-ci au produit + ajout de la référence du panier dans les produits
                 var panierCreation = new Panier();
 
                 panierCreation.utilisateur=req.user.pseudo;
                 panierCreation.statut='en cours';
                 panierCreation.date=Date.now();
-                panierCreation.total=0;
+                panierCreation.total=req.body.prix * req.body.quantites;
                 panierCreation.produit.push({
                     produit: req.body.prod,
                     quantite: req.body.quantites
                 });
                 console.log(panierCreation);
                 panierCreation.save();
+
+                Produit.findOne({ _id : req.body.prod }, function (err,prodAChanger){
+                    if(err) console.error(err);
+
+                    if(prodAChanger!=undefined){
+                        //console.log(prodAChanger);
+                        console.log(panierCreation);
+                        prodAChanger.panier.push(panierCreation);
+                        prodAChanger.save();
+                    }
+                });
             }
-            else{
+            else{ //si le panier existe déjà
 
                 Panier.findOne({
                     utilisateur: req.user.pseudo,
                     statut: 'en cours',
                     'produit.produit':  req.body.prod
-                },function (err,prodTrouve){
+                }, function (err,prodTrouve) {
                     if(err) console.error(err);
 
-                    if(prodTrouve==undefined){
-
+                    if(prodTrouve==undefined){ //ajout de l'article dans le panier
                         pan.produit.push({
                             produit: req.body.prod,
                             quantite: req.body.quantites
                         });
-
                         pan.save();
+                        var prix=0;
 
-                    }
-                    else{
+                        var maxOccu=pan.produit.length - 1;
+                        for(var i = 0 ; i<maxOccu ; i++){
+                            //console.log(i + " " + maxOccu + " " +pan.produit[i].produit.prix);
+                            prix+=pan.produit[i].produit.prix * pan.produit[i].quantite;
+                        }
+                        prix+=req.body.prix * req.body.quantites;
 
-                        Panier.findOneAndUpdate( {_id : prodTrouve._id, 'produit.produit': req.body.prod }, {
-                            "$set" : { "produit.$.quantite" : req.body.quantites}
-                        }, function (err,prodd){} );
+                        Panier.findOneAndUpdate( {_id : pan._id}, {
+                            "$set" : { total : prix }
+                        }, function (err,panierChange){} );
 
-                        //prodTrouve.save();
-                    }
-                });
-
-
-                var val=0;
-
-                Produit.findById(req.body.prod,function (err,prod){
-                    val=prod.prix;
-                });
-
-                var j=0;
-
-                Produit.findOne({
-                    utilisateur: req.user.pseudo,
-                    statut: 'en cours'
-                }, function (err,pan2){
-                    if(err) console.error(err);
-
-                    for(var i = 0 ; i<pan2.produit.length ; i++){
-                        console.log(i);
-                        console.log(pan2.produit[i].produit);
-                        var qt=pan2.produit[i].quantite;
-
-                        Produit.findOne({_id : pan2.produit[i].produit},function (err,prod){
+                        Produit.findOne({ _id : req.body.prod }, function (err,prodAChanger){
                             if(err) console.error(err);
-                            //console.log(prod.nom);
-                            val+=prod.prix*qt;
-                            var occu=pan2.produit.length - 1;
-                            console.log("test " + occu + " et " + j + " et " + val);
 
-                            if(j==occu){
-                                console.log("prout " + val);
-                                Panier.findOneAndUpdate({_id : pan2.id} , {$set : { total : val }}, function (err){
-                                    if(err) console.error(err);
-                                });
+                            if(prodAChanger!=undefined){
+                                //console.log(prodAChanger);
+                                console.log(panierCreation);
+                                prodAChanger.panier.push(panierCreation);
+                                prodAChanger.save();
                             }
-
-                            j++;
-
                         });
                     }
+                    else{ //maj de l'article dans le panier
+                        var prix=0;
 
+                        var maxOccu=pan.produit.length - 1;
+                        console.log("Nombre de produit -1 : " + maxOccu);
+
+                        for(var i = 0 ; i<=maxOccu ; i++){
+                            console.log("tour " + i);
+                            if(pan.produit[i].produit._id == req.body.prod){
+                                prix += req.body.prix * req.body.quantites;
+                                console.log(prix + " quantité : " + req.body.quantites + " prix : " +  req.body.prix);
+                            }
+                            else{
+                                prix+=pan.produit[i].produit.prix * pan.produit[i].quantite;
+                                console.log(prix + " quantité déjà présente : " + pan.produit[i].quantite + " prix : " +  pan.produit[i].produit.prix);
+                            }
+                        }
+
+                        Panier.findOneAndUpdate( {_id : prodTrouve._id, 'produit.produit': req.body.prod }, {
+                            "$set" : {
+                                "produit.$.quantite" : req.body.quantites,
+                                total : prix
+                            }
+                        }, function (err,prodd){} );
+                    }
                 });
-
             }
-
-
-
 
         });
     }

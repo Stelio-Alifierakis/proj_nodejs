@@ -15,7 +15,7 @@ var ProduitSchema = new mongoose.Schema({
     description : { type : String },
     //categorie : [{ type : Schema.Types.ObjectId, ref: 'Categories' }],
     categorie : { type : String, required: true},
-    panier : [{type: Schema.Types.ObjectId, ref: 'ProdPanierSchema'}],
+    panier : [{type: Schema.Types.ObjectId, ref: 'Panier'}],
     image : { type : String }
 });
 

@@ -49,16 +49,18 @@ app.use(function (req,res,next) {
   var i=0;
   res.locals.aleatoireProd = [] ;
   x = Math.floor(Math.random() * (res.locals.produits.length));
-  while(i!=3) {
-    if(res.locals.produits[x] != "")
-    {
-      res.locals.aleatoireProd.push(res.locals.produits[x]);
-      res.locals.produits[x] = "" ;
-      i++;
-    }
-    else x = Math.floor(Math.random() * (res.locals.produits.length));
+  if(res.locals.produits.length>=3){
+    while(i!=3) {
+      if(res.locals.produits[x] != "")
+      {
+        res.locals.aleatoireProd.push(res.locals.produits[x]);
+        res.locals.produits[x] = "" ;
+        i++;
+      }
+      else x = Math.floor(Math.random() * (res.locals.produits.length));
 
-    //console.log("nombre = "+ x);
+      //console.log("nombre = "+ x);
+    }
   }
   next();
 })

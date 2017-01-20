@@ -36,14 +36,13 @@ html(lang='fr')
       #gauche
         p
           toto-------------------------------------------------------------
+          if utilisateur != undefined
+            p #{utilisateur.pseudo}
         p
           utilisateur.pseudo
       #droite
-        if utilisateur!=undefined
-          p #{utilisateur.pseudo}
-        if produits!=undifined
+        if aleatoireProd!=undefined
           for produit,i in aleatoireProd
-
             .navProd
               a(href="/produits/detail/"+produit.id)
                 .navHeader
