@@ -6,6 +6,8 @@ require('../modeles/db');
 var bcrypt = require('bcryptjs');
 require('passport');
 
+const util= require('util');
+
 module.exports.inscriptionControleur =function (req, res, next) {
     res.render('inscription');
 
@@ -23,10 +25,14 @@ module.exports.profilControleur =function (req, res, next) {
 
 module.exports.panierControleur =function (req, res, next) {
 
-    
-
-    res.render('panier');
-
+    Panier.find({
+        utilisateur: req.user.pseudo
+    }).populate('produit.produit').exec(function (err,pan){
+        if(err) console.error(err);
+        //console.log(pan);
+        console.log(util.inspect(pan,false,null));
+        res.render('panier',{tab_panier : pan});
+    });
 }
 
 module.exports.addProduitPanier =function (req, res, next) {

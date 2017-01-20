@@ -3,3 +3,13 @@ block titre
   h2 Mon panier
 block content
   p Vous n'avez aucun panier de mis
+  if tab_panier!=undefined
+    for paniers in tab_panier
+      p
+      for prod in paniers.produit
+        p
+          img(src='#{prod.produit.image}', alt='non disponible', height='80', width='80')
+          span Produit : #{prod.produit.nom} &nbsp;
+          span Prix/unité : #{prod.produit.prix} € &nbsp;
+          span Quantités : #{prod.quantite} &nbsp;
+      p #{paniers.total} €
