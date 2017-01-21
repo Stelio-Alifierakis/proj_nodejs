@@ -38,7 +38,7 @@ module.exports.panierControleur =function (req, res, next) {
 module.exports.addProduitPanier =function (req, res, next) {
 
     var utilisateur=req.user;
-    if(utilisateur!=undefined){
+    if(utilisateur!=undefined && req.body.quantites > 0){
 
         Panier.findOne({
             utilisateur: req.user.pseudo,
@@ -216,7 +216,6 @@ module.exports.postCreerCategorie =function (req, res, next) {
     else{
         res.redirect('/wtf');
     }
-
 }
 
 module.exports.creerProduitLienControleur =function (req, res, next) {

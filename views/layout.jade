@@ -35,11 +35,11 @@ html(lang='fr')
                 a(href="/login") Connexion
       #gauche
         p
-          toto-------------------------------------------------------------
           if utilisateur != undefined
-            p #{utilisateur.pseudo}
-        p
-          utilisateur.pseudo
+            .navProd
+              h3 #{utilisateur.pseudo}
+              p
+                img(src='#{utilisateur.avatar}', alt='non disponible', height='100', width='100')
       #droite
         if aleatoireProd!=undefined
           for produit,i in aleatoireProd
