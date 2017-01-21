@@ -48,6 +48,8 @@ router.get('/connexion',utilisateurController.connexionControleur) ;
 
 router.get('/panier', testUser,utilisateurController.panierControleur);
 
+router.get('/SuppProdPanier/:id', testUser,utilisateurController.suppProdPanier);
+
 router.get('/profil',utilisateurController.profilControleur);
 
 router.get('/creerProduit',utilisateurController.addProduitControleur);

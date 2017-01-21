@@ -17,7 +17,6 @@ module.exports.categoriesControleur =function (req, res, next) {
     Categorie.find(function (err,categories) {
         res.render('categories',{tab_categories : categories});
     })
-
 }
 
 module.exports.rechercheControleur =function (req, res, next) {

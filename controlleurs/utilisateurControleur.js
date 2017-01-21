@@ -30,7 +30,7 @@ module.exports.panierControleur =function (req, res, next) {
     }).populate('produit.produit').exec(function (err,pan){
         if(err) console.error(err);
         //console.log(pan);
-        console.log(util.inspect(pan,false,null));
+        //console.log(util.inspect(pan,false,null));
         res.render('panier',{tab_panier : pan});
     });
 }
@@ -142,6 +142,53 @@ module.exports.addProduitPanier =function (req, res, next) {
     }
     res.redirect("/utilisateur/panier");
     //res.render('index');
+}
+
+module.exports.suppProdPanier =function (req, res, next) {
+    var utilisateur=req.user;
+    if(utilisateur!=undefined){
+
+        Panier.findOne({
+            utilisateur: req.user.pseudo,
+            statut: 'en cours',
+            'produit.produit': req.params.id
+        }).populate('produit.produit').exec(function (err,pan) {
+            if (pan != undefined) {
+                //console.log("---------------------->" + req.params.id);
+
+                var maxOccu = pan.produit.length - 1;
+                for (var i = 0; i <= maxOccu; i++) {
+                    console.log("-------------------------> id produit" + pan.produit[i].produit._id);
+                    if (pan.produit[i].produit._id == req.params.id) {
+                        console.log(pan.produit[i]._id);
+                        pan.produit.pull(pan.produit[i]._id);
+                        pan.save();
+                    }
+                }
+
+                var prix = 0;
+
+                maxOccu = pan.produit.length - 1;
+                console.log("Nombre de produit -1 : " + maxOccu);
+
+                for (var i = 0; i <= maxOccu; i++) {
+                    console.log("tour " + i);
+                    if (pan.produit[i].produit._id != req.params.id) {
+                        prix += pan.produit[i].produit.prix * pan.produit[i].quantite;
+                        console.log(pan._id);
+                    }
+                }
+
+                Panier.findOneAndUpdate({_id: pan._id}, {
+                    "$set": {
+                        total: prix
+                    }
+                }, function (err, prodd) {
+                });
+            }
+        });
+    }
+    res.redirect("/utilisateur/panier");
 }
 
 module.exports.addProduitControleur =function (req, res, next) {

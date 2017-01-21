@@ -2,14 +2,21 @@ extends layout
 block titre
   h2 Mon panier
 block content
-  p Vous n'avez aucun panier de mis
-  if tab_panier!=undefined
+  if tab_panier!=undefined && tab_panier.length!=0
     for paniers in tab_panier
-      p
-      for prod in paniers.produit
+      if paniers.total>0
         p
-          img(src='#{prod.produit.image}', alt='non disponible', height='80', width='80')
-          span Produit : #{prod.produit.nom} &nbsp;
-          span Prix/unité : #{prod.produit.prix} € &nbsp;
-          span Quantités : #{prod.quantite} &nbsp;
-      p #{paniers.total} €
+          for prod in paniers.produit
+            img(src='#{prod.produit.image}', alt='non disponible', height='80', width='80')
+            span Produit : #{prod.produit.nom} &nbsp;
+            span Prix/unité : #{prod.produit.prix} € &nbsp;
+            span Quantités : #{prod.quantite} &nbsp;
+            a(href="/produits/detail/" + prod.produit._id) Changer la commande de ce produit
+            span &nbsp;
+            a(href="/utilisateur/SuppProdPanier/" + prod.produit.id) Supprimer le produit de la commande
+            span <br>
+        p #{paniers.total} €
+      else
+        p Vous n'avez aucun article dans votre panier
+  else
+    p Vous n'avez aucun panier
