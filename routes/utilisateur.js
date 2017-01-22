@@ -50,6 +50,12 @@ router.get('/panier', testUser,utilisateurController.panierControleur);
 
 router.get('/SuppProdPanier/:id', testUser,utilisateurController.suppProdPanier);
 
+router.get('/PayerPanier', testUser,utilisateurController.payerPanier);
+
+router.get('/AnnulPanier', testUser,utilisateurController.annulPanier);
+
+router.get('/AnnulPanier/:id', testUser,utilisateurController.retourPanier);
+
 router.get('/profil',utilisateurController.profilControleur);
 
 router.get('/creerProduit',utilisateurController.addProduitControleur);

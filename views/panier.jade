@@ -4,19 +4,31 @@ block titre
 block content
   if tab_panier!=undefined && tab_panier.length!=0
     for paniers in tab_panier
-      if paniers.total>0
-        p
-          for prod in paniers.produit
-            img(src='#{prod.produit.image}', alt='non disponible', height='80', width='80')
-            span Produit : #{prod.produit.nom} &nbsp;
-            span Prix/unité : #{prod.produit.prix} € &nbsp;
-            span Quantités : #{prod.quantite} &nbsp;
-            a(href="/produits/detail/" + prod.produit._id) Changer la commande de ce produit
+      if paniers.statut == "en cours"
+        if paniers.total>0
+          p
+            for prod in paniers.produit
+              img(src='#{prod.produit.image}', alt='non disponible', height='80', width='80')
+              span Produit : #{prod.produit.nom} &nbsp;
+              span Prix/unité : #{prod.produit.prix} € &nbsp;
+              span Quantités : #{prod.quantite} &nbsp;
+              a(href="/produits/detail/" + prod.produit._id) Changer la commande
+              span &nbsp;
+              a(href="/utilisateur/SuppProdPanier/" + prod.produit.id) Supprimer
+              span <br>
+          p total : #{paniers.total} € &nbsp;
+            a(href="/utilisateur/AnnulPanier") Annuler le panier
             span &nbsp;
-            a(href="/utilisateur/SuppProdPanier/" + prod.produit.id) Supprimer le produit de la commande
-            span <br>
-        p #{paniers.total} €
-      else
-        p Vous n'avez aucun article dans votre panier
+            a(href="/utilisateur/PayerPanier") Payer les marchandises
+        else
+          p Vous n'avez aucun article dans votre panier
   else
     p Vous n'avez aucun panier
+  h4 Historique des paniers
+    for paniers2 in tab_panier
+      if paniers2.statut != "en cours"
+        p panier du #{paniers2.date} &nbsp;
+          span total : #{paniers2.total} € &nbsp;
+          span Statut : #{paniers2.statut} &nbsp;
+          if paniers2.statut == "annulé" && panierEnCours==undefined
+            a(href="/utilisateur/AnnulPanier/" + paniers2._id) Reprendre la commande

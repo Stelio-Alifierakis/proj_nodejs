@@ -92,6 +92,20 @@ app.use(function (req,res,next){
     next();
 });
 
+app.use(function (req,res,next){
+  if(req.user!=undefined){
+    Panier.findOne({
+      utilisateur: req.user.pseudo,
+      statut: 'en cours'
+    },function (err,pan) {
+      if(err) console.error(err);
+
+      res.locals.panierEnCours=pan;
+    });
+  }
+  next();
+});
+
 var login = require ('./routes/login')(passport);
 
 app.use('/', index);

@@ -191,6 +191,47 @@ module.exports.suppProdPanier =function (req, res, next) {
     res.redirect("/utilisateur/panier");
 }
 
+module.exports.annulPanier =function (req, res, next) {
+    Panier.findOneAndUpdate({
+        utilisateur: req.user.pseudo,
+        statut: 'en cours'
+    }, {
+        "$set": {
+            statut: 'annulé'
+        }
+    }, function (err,pan) {});
+
+    res.redirect("/utilisateur/panier");
+}
+
+module.exports.retourPanier =function (req, res, next) {
+    Panier.findOneAndUpdate({
+        _id : req.params.id,
+        utilisateur: req.user.pseudo,
+        statut: 'annulé'
+    }, {
+        "$set": {
+            statut: 'en cours'
+        }
+    }, function (err,pan) {});
+
+    res.redirect("/utilisateur/panier");
+}
+
+module.exports.payerPanier =function (req, res, next) {
+    console.log('test');
+    Panier.findOneAndUpdate({
+        utilisateur: req.user.pseudo,
+        statut: 'en cours'
+    }, {
+        "$set": {
+            statut: 'payé'
+        }
+    }, function (err,pan) {});
+
+    res.redirect("/utilisateur/panier");
+}
+
 module.exports.addProduitControleur =function (req, res, next) {
     Categorie.find(function (err,categories) {
         res.render('addProduit', {tab_categories: categories});

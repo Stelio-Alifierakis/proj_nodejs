@@ -40,6 +40,10 @@ html(lang='fr')
               h3 #{utilisateur.pseudo}
               p
                 img(src='#{utilisateur.avatar}', alt='non disponible', height='100', width='100')
+                if panierEnCours!=undefined && panierEnCours.total>0
+                  span Vous avez un panier en cours.
+                  a(href="/utilisateur/panier") Voir mon panier
+
       #droite
         if aleatoireProd!=undefined
           for produit,i in aleatoireProd
@@ -61,8 +65,3 @@ html(lang='fr')
         p finalité réseaux & télécommunications
         p Année Académique 2016-2017, HEH Campus Technique
         p © 2016, Arnaque.com
-
-
-
-
-
