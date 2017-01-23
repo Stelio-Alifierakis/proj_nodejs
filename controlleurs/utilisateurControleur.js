@@ -299,7 +299,7 @@ module.exports.creerProduitLienControleur =function (req, res, next) {
 
 module.exports.postinscriptionControleur =function (req, res, next) {
     var utilisateur=req.user;
-    if(utilisateur==undefined && req.body.nomUtilisateur!=undefined && req.body.mdpUtilisateur!=undefined && req.body.mdpUtilisateur.length>5 && req.body.nomUtilisateur>5){
+    if(utilisateur==undefined && req.body.nomUtilisateur!=undefined && req.body.mdpUtilisateur!=undefined && req.body.mdpUtilisateur.length>5 && req.body.nomUtilisateur.length>5){
         var user = new Utilisateur ();
         var salt = bcrypt.genSaltSync(10);
         var hash = bcrypt.hashSync(req.body.mdpUtilisateur,salt);
