@@ -42,7 +42,7 @@ var testUser = function(req,res,next){
     res.redirect('/wtf');
 }
 
-router.get('/inscription', testUser,utilisateurController.inscriptionControleur);
+router.get('/inscription',utilisateurController.inscriptionControleur);
 
 router.get('/connexion',utilisateurController.connexionControleur) ;
 
@@ -66,9 +66,9 @@ router.post('/panier',utilisateurController.addProduitPanier);
 
 router.post('/creerCategorie', testAdmin,utilisateurController.postCreerCategorie);
 
-router.post('/creerProduit',utilisateurController.creerProduitLienControleur);
+router.post('/creerProduit', testAdmin,utilisateurController.creerProduitLienControleur);
 
-router.post('/inscription',testUser,utilisateurController.postinscriptionControleur);
+router.post('/inscription',utilisateurController.postinscriptionControleur);
 
 router.post('/connexion',utilisateurController.postConnexionControleur);
 
