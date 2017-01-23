@@ -2,6 +2,8 @@ extends layout
 block titre
   h2 Recherche
 block content
+  br
+  br
   form(method='post' action='/produits/recherche')
     input(type="text" name="rechercheNom" placeholder="Recherche")
     input(type="submit" value="Valider")
@@ -19,6 +21,8 @@ block content
             li Catégorie : #{produit.categorie}
         p.p_desc Description : #{produit.description}
         if utilisateur != undefined
+          p
+            a(href="/produits/detail/" + produit.id) Voir détails
           if utilisateur.role == "admin"
             a(href="/produits/editerProduit/" + produit.id) Editer le produit
             br

@@ -86,7 +86,6 @@ nav a:hover{
   background-color: #FBF2B7;
   float: left;
   width : 20%;
-  min-height: 500px;
   overflow: auto;
   color : #111111;
   margin-left : 1%;
@@ -116,12 +115,118 @@ nav a:hover{
   clear: both;
 }
 
-.produit {
+/* LAYOUT PANIER */
+
+.produitPanier {
   border : 1px groove #FBF2B7;
-  width: 30%;
+  width: 97.5%;
   float : left;
   margin : 10px;
 }
+
+.panierTotaux {
+  border : 2.5px solid #FBF2B7;
+  width: 97.5%;
+  float : left;
+  margin : 10px;
+}
+
+.totauxLeft {
+  float: left;
+  padding: 15px;
+  font-weight:bold;
+  font-size: 2rem;
+}
+
+.totauxRight {
+  float: right;
+  padding: 20px;
+  text-align: center;
+}
+
+.totauxRight li {
+  margin-top : 20px;
+}
+
+.totauxRight ul {
+  list-style:  none;
+  padding: 0px;
+}
+
+li#payer {
+  display: inline-block;
+  list-style: none;
+  padding: 0px;
+  margin: 0;
+}
+
+li#payer ul {
+  padding:0;
+  margin:0;
+}
+
+li#payer a {
+  text-decoration : none;
+  display : block;padding:20px;
+  color : #FBF2B7;
+  background-color: #AA1111;
+}
+
+li#payer a:hover{
+  background-color:#FF0000;color : #FBF2B7}
+
+.produitPanier ul{
+  padding-left: 10px;
+  list-style : none;
+  padding : 0;
+  margin:0;
+}
+
+.produitPanier {
+  padding: 0px;
+}
+
+.produitPanier .total {
+  border-bottom: 0.5px solid #FBF2B7;
+  padding : 15px;
+}
+
+.produitPanier p {
+  padding-left : 30px;
+}
+
+.produitPanier img {
+
+  float : left;
+  margin-left: 5px;
+  margin-right: 15px;
+  margin-bottom: 10px;
+
+}
+
+.contentPanier {
+  float: right;
+  padding: 20px;
+}
+
+.contentPanier1 {
+
+  padding : 10px;
+  border :  0.5px groove #FBF2B7;
+  border-width: 0px 0px 1px 0px;
+}
+
+.contentPanier2 {
+
+  padding : 10px;
+  padding-right: 20px;
+  border :  0.5px groove #FBF2B7;
+  border-width: 1px 0px 0px 0px;
+}
+
+
+
+/* LAYOUT DETAIL */
 
 .navProd {
   border : 1px groove #111111;
@@ -151,6 +256,15 @@ nav a:hover{
   font-weight:bold;
 }
 
+/* LAYOUT PRODUIT */
+
+.produit {
+  border : 1px groove #FBF2B7;
+  width: 30%;
+  float : left;
+  margin : 10px;
+}
+
 .produit img {
 
   float : left;
@@ -161,6 +275,12 @@ nav a:hover{
 }
 
 .headerProduit {
+
+  border-bottom : 1px groove #FBF2B7;
+  padding: 5px;
+}
+
+.headerPanier {
 
   border-bottom : 1px groove #FBF2B7;
   padding: 5px;
