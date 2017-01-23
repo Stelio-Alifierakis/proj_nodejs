@@ -8,27 +8,44 @@ block content
         if paniers.total>0
           p
             for prod in paniers.produit
-              img(src='#{prod.produit.image}', alt='non disponible', height='80', width='80')
-              span Produit : #{prod.produit.nom} &nbsp;
-              span Prix/unité : #{prod.produit.prix} € &nbsp;
-              span Quantités : #{prod.quantite} &nbsp;
-              a(href="/produits/detail/" + prod.produit._id) Changer la commande
-              span &nbsp;
-              a(href="/utilisateur/SuppProdPanier/" + prod.produit.id) Supprimer
-              span <br>
-          p total : #{paniers.total} € &nbsp;
-            a(href="/utilisateur/AnnulPanier") Annuler le panier
-            span &nbsp;
-            a(href="/utilisateur/PayerPanier") Payer les marchandises
+              .produitPanier
+                .headerProduit
+                  h3 Produit : #{prod.produit.nom}
+                p
+                  img(src='#{prod.produit.image}', alt='non disponible', height='100', width='100')
+                .contentPanier
+                  .contentPanier1
+                    ul
+                      li  Prix/unité : #{prod.produit.prix}
+                      li  Quantités : #{prod.quantite}
+                  .contentPanier2
+                    ul
+                      li
+                        a(href="/produits/detail/" + prod.produit._id) Changer la commande
+                      li
+                        a(href="/utilisateur/SuppProdPanier/" + prod.produit.id) Supprimer
+          .panierTotaux
+            .totauxLeft
+              p Total : #{paniers.total} €
+            .totauxRight
+              ul
+                li#payer
+                  a(href="/utilisateur/PayerPanier") Payer les marchandises
+                li
+                  a(href="/utilisateur/AnnulPanier") Annuler le panier
         else
           p Vous n'avez aucun article dans votre panier
   else
     p Vous n'avez aucun panier
-  h4 Historique des paniers
+  .produitPanier
+    .headerPanier
+      h4 Historique des paniers
     for paniers2 in tab_panier
       if paniers2.statut != "en cours"
-        p panier du #{paniers2.date} &nbsp;
-          span total : #{paniers2.total} € &nbsp;
-          span Statut : #{paniers2.statut} &nbsp;
-          if paniers2.statut == "annulé" && panierEnCours==undefined
+        .total
+          p Panier du #{paniers2.date}
+          p Total : #{paniers2.total} €
+          p Statut : #{paniers2.statut}
+          if paniers2.statut == "annulé" && panierEnCours == undefined
             a(href="/utilisateur/AnnulPanier/" + paniers2._id) Reprendre la commande
+
